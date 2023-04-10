@@ -55,14 +55,14 @@ class Collection(BaseModel):
     """
     A managed collection of searchable documents exposed via as a ChatGPT plugin and a REST API.
     """
-    id:          int           = Field(description="The unique ID of the service")
-    name:        str           = Field(description="The DNS hostname for the service. The subdomain, not the FQDN.  Subject to DNS naming rules.")
-    description: Optional[str] = Field(description="A description of the collection.")
-    fqdn:        str           = Field(description="The FQDN for the service, derived from the hostname and the domain name.")
-    org_id:      int           = Field(description='The Org that owns this Service.')
-    created_by:  int           = Field(description='The user_id that created this item.')
-    updated_by:  int           = Field(description='The user_id that last modified this item.')
-    plugin_auth: str           = Field(description='The auth plugin to use for this org.')
+    id:          int            = Field(description="The unique ID of the service")
+    name:        str            = Field(description="The DNS hostname for the service. The subdomain, not the FQDN.  Subject to DNS naming rules.")
+    description: Optional[str]  = Field(description="A description of the collection.")
+    fqdn:        str            = Field(description="The FQDN for the service, derived from the hostname and the domain name.")
+    org_id:      int            = Field(description='The Org that owns this Service.')
+    created_by:  int            = Field(description='The user_id that created this item.')
+    updated_by:  int            = Field(description='The user_id that last modified this item.')
+    plugin_auth: PluginAuthType = Field(description='The auth plugin to use for this org.')
 
 
     @validator('name')

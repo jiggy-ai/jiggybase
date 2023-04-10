@@ -1,18 +1,6 @@
-from typing import Optional, List
-from pydantic import BaseModel, Field, EmailStr, HttpUrl
-from enum import Enum
+from typing import Optional
+from pydantic import BaseModel, Field, EmailStr
 
-###
-## API Key
-###
-
-
-class  ApiKey(BaseModel):
-    key:         str           = Field(default=None, description='The api key.')
-    description: Optional[str] = Field(default=None, description='Optional user supplied description of the key.')
-    created_at:  float         = Field(description='The epoch timestamp when the key was created.')
-    last_used :  float         = Field(description='The epoch timestamp when the key was last used to create a JWT.')
-    
 ###
 ## User
 ###
@@ -32,3 +20,35 @@ class UserPostRequest(BaseModel):
 class UserPostPatchRequest(BaseModel):
     name:        Optional[str] = Field(min_length=1, max_length=39, description='Unique name for the user.')
     description: Optional[str] = Field(default=None, max_length=255, description='Optional user supplied description.')
+
+
+
+###
+##  API Key Authentication
+###
+
+class AuthRequest(BaseModel):
+    key : str = Field(description = "The API key")
+    
+class Jwt(BaseModel):
+    jwt: str = Field(description='The JWT to used as bearer token')
+
+
+###
+## API Key
+###
+
+
+class  ApiKey(BaseModel):
+    key:         str           = Field(default=None, description='The api key.')
+    description: Optional[str] = Field(default=None, description='Optional user supplied description of the key.')
+    created_at:  float         = Field(description='The epoch timestamp when the key was created.')
+    last_used :  float         = Field(description='The epoch timestamp when the key was last used to create a JWT.')
+
+
+class  ApiKeyRequest(BaseModel):
+    description: Optional[str] = Field(default=None, description='Optional user supplied description of the key.')
+
+class AllApiKeyResponse(BaseModel):
+    items: list[ApiKey] = Field(description="List of all Api Keys")
+        
