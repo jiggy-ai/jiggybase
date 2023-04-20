@@ -95,7 +95,7 @@ class GPTGSession(requests.Session):
         #print("~~~~~~~~~~~~~~~~~~~~~~~~\n", method, url)
         # support 'model' (pydantic BaseModel) arg which we convert to json parameter
         if 'model' in kwargs:
-            kwargs['json'] = kwargs.pop('model').dict()
+            kwargs['data'] = kwargs.pop('model').json()
         resp =  super(GPTGSession, self).request(method, url, *args, **kwargs)
         if resp.status_code == 401:
             self.bearer_token = None

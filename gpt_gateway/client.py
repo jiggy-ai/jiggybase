@@ -54,6 +54,8 @@ class GPTGateway():
         """
         return all Collections in all Orgs that the user is a member of
         """
+        collections = []
         for org in self.orgs():
             for collection in org.collections():
-                yield collection
+                collections.append(collection)
+        return collections

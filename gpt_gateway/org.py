@@ -25,7 +25,7 @@ class Org(OrgModel):
                           plugin_auth: Optional[str] = "bearer",
                           description: Optional[str] = None) -> Collection:
         rsp = self.session.post(f"/orgs/{self.id}/collections", model=CollectionPostRequest(**locals()))
-        return Collection(**rsp.json())
+        return Collection(self.session, **rsp.json())
 
     def collections(self) -> list[Collection]:
         rsp = self.session.get(f"/orgs/{self.id}/collections")

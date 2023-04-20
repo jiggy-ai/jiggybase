@@ -2,13 +2,14 @@ from typing import Optional, List
 from pydantic import BaseModel, Field, HttpUrl, validator
 from enum import Enum
 import re
+from time import time
 
 
-
-class PluginAuthType(Enum):
+class PluginAuthType(str, Enum):
     bearer :str = "bearer"
     none   :str = "none"
     oauth  :str = "oauth"
+    
 
         
 class CollectionPostRequest(BaseModel):
@@ -16,7 +17,7 @@ class CollectionPostRequest(BaseModel):
     Used to create a new Collection service
     """
     name:         str                      = Field(description="The globally unique hostname for the collection. Subject to DNS naming rules. ")
-    display_name: Optional[str]            = Field(description="The human friendly display name for the collection.")
+    display_name: str                      = Field(description="The human friendly display name for the collection.")
     description:  Optional[str]            = Field(description="A description of the collection.")
     plugin_auth:  Optional[PluginAuthType] = Field(default=PluginAuthType.bearer, description="The authentication type to use for this collection's ChatGPT plugin.")
 
@@ -57,13 +58,15 @@ class Collection(BaseModel):
     """
     id:          int            = Field(description="The unique ID of the service")
     name:        str            = Field(description="The DNS hostname for the service. The subdomain, not the FQDN.  Subject to DNS naming rules.")
+    display_name: str           = Field(description="The human friendly display name for the collection.")    
     description: Optional[str]  = Field(description="A description of the collection.")
     fqdn:        str            = Field(description="The FQDN for the service, derived from the hostname and the domain name.")
     org_id:      int            = Field(description='The Org that owns this Service.')
     created_by:  int            = Field(description='The user_id that created this item.')
     updated_by:  int            = Field(description='The user_id that last modified this item.')
     plugin_auth: PluginAuthType = Field(description='The auth plugin to use for this org.')
-
+    created_at:  float          = Field(description='The epoch timestamp when the collection was created.')
+    updated_at:  float          = Field(description='The epoch timestamp when the collection was created.')
 
     @validator('name')
     def _name(cls, v):

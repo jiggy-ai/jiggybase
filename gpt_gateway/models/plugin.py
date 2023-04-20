@@ -16,8 +16,8 @@ class PluginConfig(BaseModel):
     name_for_human:        str = Field(max_length=50, description="The name of the plugin as it will be appear to the human user.")
     description_for_model: str = Field(max_length=4000, description="Description of the plugin as it will appear to the model.")
     description_for_human: str = Field(max_length=120, description="Description of the plugin as it will appear to the human user.")
-    logo:                  Optional[str] = Field(description="The URL of the logo for the plugin.")
-
+    logo:                  Optional[str] = Field(description="The logo for the plugin")
+    logo_url:              Optional[HttpUrl] = Field(description="The logo url for the plugin")
 
     @validator('name_for_model')
     def _name_for_model(cls, v):
@@ -33,7 +33,8 @@ class PatchPluginConfigRequest(BaseModel):
     name_for_human:        Optional[str] = Field(description="The plugin name for human")
     description_for_model: Optional[str] = Field(description="The plugin description for the model")
     description_for_human: Optional[str] = Field(description="The plugin description for human")
-    logo:                  Optional[str] = Field(description="The logo url for the plugin")
+    logo:                  Optional[str] = Field(description="The logo for the plugin")
+    logo_url:              Optional[HttpUrl] = Field(description="The logo url for the plugin")
 
     @validator('name_for_model')
     def _name_for_model(cls, v):

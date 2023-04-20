@@ -13,13 +13,12 @@ class User(BaseModel):
 
 
 class UserPostRequest(BaseModel):
-    name:        str = Field(min_length=1, max_length=39, description='Unique name for the user.')
-    description: Optional[str] = Field(default=None, max_length=255, description='Optional user supplied description.')
+    name:            str           = Field(min_length=1, max_length=39, description='Name for the user.')
+    email:           EmailStr      = Field(description='Email address for the user.')
     
 
 class UserPostPatchRequest(BaseModel):
-    name:        Optional[str] = Field(min_length=1, max_length=39, description='Unique name for the user.')
-    description: Optional[str] = Field(default=None, max_length=255, description='Optional user supplied description.')
+    name:      Optional[str]      = Field(min_length=1, max_length=39, description='Unique name for the user.')
 
 
 
