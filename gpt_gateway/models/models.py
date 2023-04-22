@@ -7,6 +7,8 @@ from .chunk import *
 from .chatmodel import *
 from .plugin import *
 from .collection import *
+from .prompt import *
+
 
 from pydantic import BaseModel, Field, HttpUrl
 from typing import List
