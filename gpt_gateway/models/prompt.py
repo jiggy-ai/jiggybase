@@ -20,7 +20,7 @@ class PromptMessage(BaseModel):
     position  : int                = Field(description="The position offset of the item in the prompt message list. 0-based, with negative values counting from the end.")
 
 
-class PromptTaskType(Enum, str):
+class PromptTaskType(str, Enum):
     chat            = "chat"             # iterative chat (e.g. chat with a model with user/assistant message history)
     collection_chat = "collection_chat"  # iterative chat augmented with retreival from a collection
     plugin_chat     = "plugin_chat"      # iterative chat augmented with tool use via plugin interface
