@@ -7,3 +7,5 @@ from .chunk import *
 from .chatmodel import *
 from .plugin import *
 from .collection import *
+from .prompt import *
+from .chat import *
