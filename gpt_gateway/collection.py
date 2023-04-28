@@ -1,7 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel, Field, BaseConfig, HttpUrl
 from enum import Enum
-from .models import collection
+from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
 
 
 class PluginAuthType(Enum):
@@ -89,3 +89,18 @@ class Collection(collection.Collection):
         self.session.delete(f"/orgs/{self.org_id}/collections/{self.id}")
 
 
+    def get_chat_config(self) -> CollectionChatConfig:
+        """
+        Get the chat configuration for this collection.
+        """
+        rsp = self.session.get(f"/orgs/{self.org_id}/collections/{self.id}/chat_config")
+        return collection.CollectionChatConfig(**rsp.json())
+
+    def update_chat_config(self, model: str, prompt_task_id: int) -> CollectionChatConfig:
+        """
+        Update the chat configuration for this collection.
+        """
+        rsp = self.session.patch(f"/orgs/{self.org_id}/collections/{self.id}/chat_config/{model}", model=PatchCollectionChatConfig(prompt_task_id=prompt_task_id))
+        return CollectionChatConfig(**rsp.json())
+
+    

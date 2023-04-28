@@ -25,6 +25,7 @@ from gpt_gateway.models import (
     User,
     UserPostPatchRequest,
     UserPostRequest,
+    PromptTask
 )
 
 
@@ -35,6 +36,7 @@ if __name__ == "__main__":
     orgs = gptg.orgs()
     for org in orgs:
         print(f'Org: {org}')
+        print(org.prompt_tasks())
         for c in org.collections():
             print(f'   Collection: {c}')    
     collections = gptg.collections()

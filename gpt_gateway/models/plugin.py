@@ -1,63 +1,66 @@
-import os
-from pydantic import BaseModel, HttpUrl, Field, validator
-from typing import List, Optional
+
+from typing import Optional, Union
+from pydantic import BaseModel
 from enum import Enum
-from sqlmodel import SQLModel, Field
-from .collection import PluginAuthType        
-import re
-
-MODELNAME = re.compile("[a-zA-Z][a-zA-Z0-9_]*")
-
-class PluginConfig(BaseModel): 
-    """
-    The user-customizable part of PluginConfig
-    """
-    name_for_model:        str = Field("retrieval", max_length=50, description="The name of the plugin as it will be appear to the model.")
-    name_for_human:        str = Field(max_length=50, description="The name of the plugin as it will be appear to the human user.")
-    description_for_model: str = Field(max_length=4000, description="Description of the plugin as it will appear to the model.")
-    description_for_human: str = Field(max_length=120, description="Description of the plugin as it will appear to the human user.")
-    logo:                  Optional[str] = Field(description="The logo for the plugin")
-    logo_url:              Optional[HttpUrl] = Field(description="The logo url for the plugin")
-
-    @validator('name_for_model')
-    def _name_for_model(cls, v):
-        if len(v) > 50 or not v:
-            raise ValueError(f'"{v}" is an invalid model name. It must not be empty and is limited to 50 characters.')
-        elif not bool(MODELNAME.match(v)):
-         raise ValueError(f'"{v}" is an invalid model name. It can only contain letters, numbers, and underscores, and must start with a letter.')
-        return v
 
 
-class PatchPluginConfigRequest(BaseModel):
-    name_for_model:        Optional[str] = Field(description="The plugin name for the model")
-    name_for_human:        Optional[str] = Field(description="The plugin name for human")
-    description_for_model: Optional[str] = Field(description="The plugin description for the model")
-    description_for_human: Optional[str] = Field(description="The plugin description for human")
-    logo:                  Optional[str] = Field(description="The logo for the plugin")
-    logo_url:              Optional[HttpUrl] = Field(description="The logo url for the plugin")
+class Source(str, Enum):
+    email = "email"
+    file = "file"
+    chat = "chat"
+    web  = "web"
 
-    @validator('name_for_model')
-    def _name_for_model(cls, v):
-        if len(v) > 50 or not v:
-            raise ValueError(f'"{v}" is an invalid model name. It must not be empty and is limited to 50 characters.')
-        elif not bool(MODELNAME.match(v)):
-         raise ValueError(f'"{v}" is an invalid model name. It can only contain letters, numbers, and underscores, and must start with a letter.')
-        return v
+class DocumentMetadata(BaseModel):
+    source: Optional[Source] = None
+    source_id: Optional[str] = None
+    url: Optional[str] = None
+    created_at: Optional[str] = None
+    author: Union[str, list[str]] = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    
+
+class DocumentChunkMetadata(DocumentMetadata):
+    document_id: Optional[str] = None
+
+
+class DocumentChunk(BaseModel):
+    id: Optional[str] = None
+    text: str
+    metadata: DocumentChunkMetadata
+    embedding: Optional[list[float]] = None
+
+
+class DocumentChunkWithScore(DocumentChunk):
+    score: float
 
 
 
-class OpenAIVerificationToken(BaseModel):
-    openai: str
+class DocumentMetadataFilter(BaseModel):
+    document_id: Optional[str] = None
+    source: Optional[Source] = None
+    source_id: Optional[str] = None
+    author: Optional[str] = None
+    start_date: Optional[str] = None  # any date string format
+    end_date: Optional[str] = None  # any date string format
+    title: Optional[str] = None
 
 
-class OpenAIPluginAuthConfigOAuth(BaseModel):
-    """
-    The Plugin Oauth configuration as it is presented in the ai-plugin.json 
-    """
-    type:                       str         = Field("oauth", const=True)
-    client_url:                 HttpUrl     = Field(description="ChatGPT will direct the user’s browser to this url to log in to the plugin")
-    authorization_url:          HttpUrl     = Field(description="After successful login ChatGPT will complete the OAuth flow by making a POST request to this URL")
-    scope:                      str         = Field(description="The scope used for the OAuth flow")    
-    authorization_content_type: str         = Field("application/json", const=True)
-    verification_tokens:        OpenAIVerificationToken = Field(description="The verification token to send to OpenAI for the plugin")
+class Query(BaseModel):
+    query: str
+    filter: Optional[DocumentMetadataFilter] = None
+    top_k: Optional[int] = 3
 
+class QueryWithEmbedding(Query):
+    embedding: list[float]
+
+
+class QueryResult(BaseModel):
+    query: str
+    results: list[DocumentChunkWithScore]
+
+class QueryRequest(BaseModel):
+    queries: list[Query]
+
+class QueryResponse(BaseModel):
+    results: list[QueryResult]

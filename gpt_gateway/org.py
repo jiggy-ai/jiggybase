@@ -7,6 +7,7 @@ from .collection import Collection, CollectionPostRequest
 
 from .models.org import Org as OrgModel
 from .models.org import OrgRole, OrgMember, OrgPatchRequest
+from .models import PromptTask, PromptMessage, PromptTaskPostRequest, PromptTaskType
 
     
 ###
@@ -21,7 +22,9 @@ class Org(OrgModel):
         super().__init__(*args, **kwargs)
         self.session = session
         
-    def create_collection(self, name: str, 
+    def create_collection(self, 
+                          name: str, 
+                          display_name: str,
                           plugin_auth: Optional[str] = "bearer",
                           description: Optional[str] = None) -> Collection:
         rsp = self.session.post(f"/orgs/{self.id}/collections", model=CollectionPostRequest(**locals()))
@@ -62,4 +65,40 @@ class Org(OrgModel):
         self.description = updated_org_data.get("description", self.description)
         return self
         
+    def prompt_tasks(self, name=None, version=None) -> list[PromptTask]:
+        query = ''
+        if name:
+            query += f"?name={name}"
+            if version:
+                query += f"&version={version}"
+        return [PromptTask(**pt) for pt in self.session.get(f"/orgs/{self.id}/prompt_tasks{query}").json()]
 
+    def create_prompt_task(self, 
+                           name       : str, 
+                           version    : int, 
+                           prompts    : List[PromptMessage],
+                           type       : Optional[PromptTaskType] = None, 
+                           description: Optional[str] = None, 
+                           ) -> PromptTask:
+        rsp = self.session.post(f"/orgs/{self.id}/prompt_tasks", model=PromptTaskPostRequest(**locals()))
+        return PromptTask(**rsp.json())
+
+    def update_prompt_task(self,
+                           name       : str,
+                           prompts    : List[PromptMessage]) -> PromptTask:
+        pt = self.prompt_tasks(name=name)
+        if not pt:
+            raise ValueError(f"PromptTask {name} not found")
+        pt = pt[0]
+        self.create_prompt_task(name        = name, 
+                                version     = pt.version+1, 
+                                type        = pt.type, 
+                                description = pt.description, 
+                                prompts     = prompts)
+        
+    def get_prompt_task(self, prompt_task_id: int) -> PromptTask:
+        
+        return PromptTask(**self.session.get(f"/orgs/{self.id}/prompt_tasks/{prompt_task_id}").json())
+
+    def delete_prompt_task(self, prompt_task_id: int):
+        self.session.delete(f"/orgs/{self.id}/prompt_tasks/{prompt_task_id}")
