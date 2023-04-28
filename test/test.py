@@ -1,7 +1,7 @@
-import gpt_gateway as gptg
+import jiggybase
 
 
-from gpt_gateway.models import (
+from jiggybase.models import (
     ApiKey,
     ChatModelName,
     ChunkConfig,
@@ -32,11 +32,11 @@ from gpt_gateway.models import (
 
 
 if __name__ == "__main__":
-    gptg = gptg.GPTGateway()
-    orgs = gptg.orgs()
+    jb = jiggybase.JiggyBase()
+    orgs = jb.orgs()
     for org in orgs:
         print(f'Org: {org}')
         print(org.prompt_tasks())
         for c in org.collections():
             print(f'   Collection: {c}')    
-    collections = gptg.collections()
+    collections = jb.collections()

@@ -2,14 +2,14 @@ from typing import List
 from .org import Org
 from .collection import Collection
 from .models.user import User, ApiKey
-from .gptg_session import GPTGSession
+from .jiggybase_session import JiggyBaseSession
 
     
 
-class GPTGateway():
+class JiggyBase():
 
     def __init__(self):
-        self.session = GPTGSession()     
+        self.session = JiggyBaseSession()     
         
     def orgs(self) -> List[Org]:
         """

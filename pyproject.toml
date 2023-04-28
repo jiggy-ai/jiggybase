@@ -3,13 +3,13 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gpt_gateway"
+name = "jiggybase"
 version = "0.0.14"
 authors = [
   { name="Bill Kish", email="bk@jiggy.ai" },
 ]
 dependencies=['loguru', 'pedantic[email]', 'requests']
-description = "Client for GPT-Gateway.com including ChatGPT Retreiver Plugins"
+description = "Client for jiggy.ai JiggyBase including ChatGPT Retriever Plugins"
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
@@ -20,5 +20,5 @@ classifiers = [
 
 
 [project.urls]
-"Homepage" = "https://github.com/jiggy-ai/gpt-gateway-client"
-"Bug Tracker" = "https://github.com/jiggy-ai/gpt-gateway-client/issues"
+"Homepage" = "https://github.com/jiggy-ai/jiggybase"
+"Bug Tracker" = "https://github.com/jiggy-ai/jiggybase/issues"
