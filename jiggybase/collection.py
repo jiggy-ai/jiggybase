@@ -2,8 +2,12 @@ from typing import Optional
 from pydantic import BaseModel, Field, BaseConfig, HttpUrl
 from enum import Enum
 from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
+from .jiggybase_session import JiggyBaseSession
+from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter
+import os
+import mimetypes
 
-
+from typing import Union, List
 class PluginAuthType(Enum):
     bearer :str = "bearer"
     none   :str = "none"
@@ -55,7 +59,8 @@ class Collection(collection.Collection):
     def __init__(self, session, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.session = session
-        
+        self.plugin_session = JiggyBaseSession(host=f'https://{kwargs["fqdn"]}', api='')
+
     def set_description(self, description:str) -> "Collection":
         """
         Update an existing collection using its ID and the provided description.
@@ -103,4 +108,42 @@ class Collection(collection.Collection):
         rsp = self.session.patch(f"/orgs/{self.org_id}/collections/{self.id}/chat_config/{model}", model=PatchCollectionChatConfig(prompt_task_id=prompt_task_id))
         return CollectionChatConfig(**rsp.json())
 
+ 
+    def upsert_file(self, file_path: str, mimetype: str = None) -> UpsertResponse:
+        if not os.path.exists(file_path):
+            raise ValueError("File not found")
+             
+        with open(file_path, "rb") as file:
+            files = {"file": (os.path.basename(file_path), file, mimetype)}
+            rsp = self.plugin_session.post("/upsert-file", files=files)
+        return UpsertResponse.parse_obj(rsp.json())
+
+    def upsert(self, documents: List[Document]) -> UpsertResponse:
+        upsert_request = UpsertRequest(documents=documents)
+        rsp = self.plugin_session.post("/upsert", model=upsert_request)
+        return  UpsertResponse.parse_obj(rsp.json())
     
+    def query(self, queries: Union[str, List[str]]) -> QueryResponse:
+        if isinstance(queries, str):
+            queries = [queries]
+        query_requests = [Query(query=q) for q in queries]
+        qr = QueryRequest(queries=query_requests)
+        rsp = self.plugin_session.post("/query", model=qr)
+        return  QueryResponse.parse_obj(rsp.json())
+
+    def get_chunks(self, 
+                   start: int = 0, 
+                   limit: int = 10, 
+                   reverse: bool = True) -> List[DocumentChunk]:
+        params = {"start": start, "limit": limit, "reverse": reverse}
+        rsp = self.plugin_session.get("/chunks", params=params)
+        return [DocumentChunk.parse_obj(chunk) for chunk in rsp.json()]
+
+    def delete_docs(self, 
+                        ids                      : Optional[List[str]] = None, 
+                        document_metadata_filter : Optional[DocumentMetadataFilter] = None, 
+                        delete_all               : bool = False) -> DeleteResponse:
+        delete_request = DeleteRequest(ids=ids, filter=document_metadata_filter, delete_all=delete_all)
+        rsp = self.plugin_session.delete("/delete", model=delete_request)
+        return DeleteResponse.parse_obj(rsp.json())
+        

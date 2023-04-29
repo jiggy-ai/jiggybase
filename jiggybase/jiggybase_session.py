@@ -7,7 +7,7 @@ from requests.adapters import HTTPAdapter
 import requests
 from .login import window_open
 
-GPTG_HOST     = 'https://api.gpt-gateway.com'   # transition to jiggy.ai in progress
+JIGGYBASE_HOST     = 'https://api.gpt-gateway.com'   # transition to jiggy.ai in progress
 
 JB_KEY_FILE = os.path.expanduser('~') + '/.jb'   # local file to store user entered apikey 
 
@@ -24,21 +24,24 @@ class ServerError(Exception):
 
     
 class JiggyBaseSession(requests.Session):
-    def __init__(self, gptg_api='gpt-gateway-v1', gptg_host=GPTG_HOST, *args, **kwargs):
+    def __init__(self, host=JIGGYBASE_HOST, api='gpt-gateway-v1',  *args, **kwargs):
         """
         Extend requests.Session with common GPTG authentication, retry, and exceptions.
 
-        gptg_api:  The gptg api & version to use.
-        
-        gptg_host: The url host prefix of the form "https:/api.gpt-gateway.com"
-                    if gptg_host arg is not set, will use 
-                    GPTG_HOST environment variable or "api.gpt-gateway.com" as final default.
-        
-        final url prefix are of the form "https:/{gptg_host}/{gptg_api}"
+        host: The url host prefix of the form "https:/api.gpt-gateway.com"
+              if host arg is not set, will use 
+                    JIGGYBASE_HOST environment variable or "api.gpt-gateway.com" as final default.
+
+        api:  The api & version to use. defaults to 'gpt-gateway-v1'
+                
+        final url prefix are of the form "https:/{host}/{api}"
         """
         super(JiggyBaseSession, self).__init__(*args, **kwargs)
-        self.host = gptg_host
-        self.prefix_url = f"{gptg_host}/{gptg_api}"
+        self.host = host
+        if api:
+            self.prefix_url = f"{host}/{api}"
+        else:
+            self.prefix_url = host            
         test_url = f"{self.prefix_url}/docs"
         if requests.head(test_url).status_code != 200:
             raise Exception(f"Invalid or unreachable api: {self.prefix_url}")
@@ -54,11 +57,10 @@ class JiggyBaseSession(requests.Session):
 
     def _set_bearer(self, jwt):
         self.bearer_token = jwt
-        print(jwt)
         self.headers['Authorization'] = f"Bearer {jwt}"
 
     def _getjwt(self, key):        
-        resp = requests.post(f"{self.host}/gpt-gateway-v1/auth", json={'key': key})
+        resp = requests.post(f"{JIGGYBASE_HOST}/gpt-gateway-v1/auth", json={'key': key})
         if resp.status_code == 200:
             self._set_bearer(resp.json()['jwt'])
         elif resp.status_code == 401:

@@ -1,5 +1,4 @@
-
-from typing import Optional, Union
+from typing import Optional, Union, List
 from pydantic import BaseModel
 from enum import Enum
 
@@ -29,12 +28,39 @@ class DocumentChunk(BaseModel):
     text: str
     metadata: DocumentChunkMetadata
     embedding: Optional[list[float]] = None
+    token_count: Optional[int] = None
 
+    def __str__(self):
+        if len(self.text) > 100:
+            text = self.text[:100] + '...'
+        else: 
+            text = self.text
+        text = text.replace('\n', ' ')
+        estr = "DocumentChunk("
+        if self.id is not None:
+            estr += f"id={self.id}, "
+        if self.metadata is not None:
+            estr += f"metadata={str(self.metadata)}, "
+        if self.embedding is not None:
+            estr += f"embedding=dim{len(self.embedding)}, "
+        estr += f"text={text})"
+        return estr
 
+    
 class DocumentChunkWithScore(DocumentChunk):
     score: float
 
 
+class Document(BaseModel):
+    id: Optional[str]
+    text: str
+    metadata: Optional[DocumentMetadata] = None
+    mimetype: Optional[str] = None
+    token_count: Optional[int] = None
+
+
+class DocumentWithChunks(Document):
+    chunks: List[DocumentChunk]
 
 class DocumentMetadataFilter(BaseModel):
     document_id: Optional[str] = None
@@ -59,8 +85,34 @@ class QueryResult(BaseModel):
     query: str
     results: list[DocumentChunkWithScore]
 
+
+class UpsertRequest(BaseModel):
+    documents: List[Document]
+
+
+class UpsertResponse(BaseModel):
+    ids: List[str]
+
+
 class QueryRequest(BaseModel):
-    queries: list[Query]
+    queries: List[Query]
+
 
 class QueryResponse(BaseModel):
-    results: list[QueryResult]
+    results: List[QueryResult]
+
+
+class DeleteRequest(BaseModel):
+    ids: Optional[List[str]] = None
+    filter: Optional[DocumentMetadataFilter] = None
+    delete_all: Optional[bool] = False
+
+
+class DeleteResponse(BaseModel):
+    success: bool
+
+
+class Accounting(BaseModel):
+    chunk_count: int
+    doc_count: int
+    page_count: int
