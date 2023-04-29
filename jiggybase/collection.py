@@ -110,6 +110,9 @@ class Collection(collection.Collection):
 
  
     def upsert_file(self, file_path: str, mimetype: str = None) -> UpsertResponse:
+        """
+        Add a file to the collection.
+        """
         if not os.path.exists(file_path):
             raise ValueError("File not found")
              
@@ -119,15 +122,25 @@ class Collection(collection.Collection):
         return UpsertResponse.parse_obj(rsp.json())
 
     def upsert(self, documents: List[Document]) -> UpsertResponse:
+        """
+        Add a list of Document objects to the collection.
+        """
         upsert_request = UpsertRequest(documents=documents)
         rsp = self.plugin_session.post("/upsert", model=upsert_request)
         return  UpsertResponse.parse_obj(rsp.json())
     
-    def query(self, queries: Union[str, List[str]]) -> QueryResponse:
+    def query(self, queries: Union[str, List[str], Query], top_k : int = 10) -> QueryResponse:
+        """
+        Query the collection returning the top_k results for each query.
+        queries can be either a single string, a list of strings, or a list of Query objects.
+        if it is a string or list of strings, the specified top_k will be used for each of the queries.
+        Returns a QueryResponse object.
+        """
         if isinstance(queries, str):
-            queries = [queries]
-        query_requests = [Query(query=q) for q in queries]
-        qr = QueryRequest(queries=query_requests)
+            queries = [Query(query=queries, top_k=top_k)]
+        elif isinstance(queries, Query):
+            queries = [Query(query=q, top_k=top_k) for q in queries]
+        qr = QueryRequest(queries=queries)
         rsp = self.plugin_session.post("/query", model=qr)
         return  QueryResponse.parse_obj(rsp.json())
 
@@ -135,14 +148,25 @@ class Collection(collection.Collection):
                    start: int = 0, 
                    limit: int = 10, 
                    reverse: bool = True) -> List[DocumentChunk]:
+        """
+        low level interface for iterating through the chunks in a collection
+        start - Offset of the first result to return
+        limit - Number of results to return starting from the offset
+        reverse - Reverse the order of the items returned
+        """
         params = {"start": start, "limit": limit, "reverse": reverse}
         rsp = self.plugin_session.get("/chunks", params=params)
         return [DocumentChunk.parse_obj(chunk) for chunk in rsp.json()]
 
+
     def delete_docs(self, 
-                        ids                      : Optional[List[str]] = None, 
-                        document_metadata_filter : Optional[DocumentMetadataFilter] = None, 
-                        delete_all               : bool = False) -> DeleteResponse:
+                    ids                      : Optional[List[str]] = None, 
+                    document_metadata_filter : Optional[DocumentMetadataFilter] = None, 
+                    delete_all               : Optional[bool] = False) -> DeleteResponse:
+        """
+        Delete items in the collection by document id's or document metadata filter.
+        A delete_all option is also provided to delete all documents in the collection.
+        """
         delete_request = DeleteRequest(ids=ids, filter=document_metadata_filter, delete_all=delete_all)
         rsp = self.plugin_session.delete("/delete", model=delete_request)
         return DeleteResponse.parse_obj(rsp.json())

@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jiggybase"
-version = "0.0.14"
+version = "0.0.16"
 authors = [
   { name="Bill Kish", email="bk@jiggy.ai" },
 ]
 dependencies=['loguru', 'pedantic[email]', 'requests']
-description = "Client for jiggy.ai JiggyBase including ChatGPT Retriever Plugins"
+description = "Client for Jiggy AI JiggyBase, including ChatGPT Retriever Plugins"
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
@@ -20,5 +20,5 @@ classifiers = [
 
 
 [project.urls]
-"Homepage" = "https://github.com/jiggy-ai/jiggybase"
-"Bug Tracker" = "https://github.com/jiggy-ai/jiggybase/issues"
+"Homepage"    = "https://github.com/jiggy-ai/jiggybase"
+"Bug Tracker" = "https://github.com/jiggy-ai/issues"

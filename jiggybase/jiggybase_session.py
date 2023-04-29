@@ -9,7 +9,7 @@ from .login import window_open
 
 JIGGYBASE_HOST     = 'https://api.gpt-gateway.com'   # transition to jiggy.ai in progress
 
-JB_KEY_FILE = os.path.expanduser('~') + '/.jb'   # local file to store user entered apikey 
+JB_KEY_FILE = os.path.expanduser('~') + '/.jiggybase'   # local file to store user entered apikey 
 
 
 class ClientError(Exception):
@@ -76,7 +76,7 @@ class JiggyBaseSession(requests.Session):
         else:
             while True:
                 window_open("https://jiggy.ai/authorize")
-                key_input = input("Enter your gpt-gateway.com API Key: ")
+                key_input = input("Enter your JiggyBase API Key: ")
                 if key_input[:4] == "jgy-":
                     # try using the key to see if it is valid
                     try:
