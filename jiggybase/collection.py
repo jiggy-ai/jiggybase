@@ -144,6 +144,13 @@ class Collection(collection.Collection):
         rsp = self.plugin_session.post("/query", model=qr)
         return  QueryResponse.parse_obj(rsp.json())
 
+    def get_doc(self, id: str) -> list[DocumentChunk]:
+        """
+        Get a document by id
+        """
+        rsp = self.plugin_session.get(f"/docs/{id}")
+        return [DocumentChunk.parse_obj(c) for c in rsp.json()]
+    
     def get_chunks(self, 
                    start: int = 0, 
                    limit: int = 10, 
