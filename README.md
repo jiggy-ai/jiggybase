@@ -35,8 +35,8 @@ collection = jb.collection('my-collection')
 
 collection.upsert_file('/path/to/my/doc')
 
-# my doc is now available in the collection and can be accessed by the collection's ChatGPT plugin, via chat.jiggy.ai, or via the associated chat API endpoint.
 ```
+The document is now available in the collection and can be accessed by the collection's ChatGPT plugin, via chat.jiggy.ai, or via the associated chat API endpoint.
 
 
 ### Client methods
