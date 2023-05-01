@@ -39,9 +39,9 @@ collection.upsert_file('/path/to/my/doc')
 The document is now available in the collection and can be accessed by the collection's ChatGPT plugin, via chat.jiggy.ai, or via the associated chat API endpoint.
 
 
-### Client methods
+### JiggyBase Client
 
-Here are the available `JiggyBase` client methods:
+These are the top level methods of th `JiggyBase` client, primarily used for getting the user's organizations or all collections across all organizations.
 
 - `orgs()` - Returns a list of `Org` objects the user is a member of.
 - `get_org(name_or_id: str)` - Returns the `Org` object matching the given name or ID.
@@ -50,7 +50,9 @@ Here are the available `JiggyBase` client methods:
 - `collections()` - Returns a list of all `Collection` objects in all organizations the user is a member of.
 - `collection(name: str)` - Returns the `Collection` object matching the given name.
 
-### Organization methods
+### Organization
+
+Organizations in JiggyBase are a mechanism for separating different customers within the JiggyBase service.   Users can be a member of mutiple unrelated organizations.  A new user who subscribes to a JiggyBase service tier has their own oganization that they control as administrator of the organization.  Users can also be invited to an organization by existing members of the organization.
 
 For an `Org` object (e.g., `my_org = jb.get_org("<org_name>")`), you have access to the following methods:
 
@@ -60,32 +62,33 @@ For an `Org` object (e.g., `my_org = jb.get_org("<org_name>")`), you have access
 - `update([name: Optional[str] = None, description: Optional[str] = None])` - Updates the organization's name or description.
 
 
-### Collection methods
+### Collection
+
+A collection is a group of documents that can be used to augment ChatGPT language models with your personalized information by using information from your collection to inform ChatGPT responses.   A collection can be exposed as a ChatGPT Plugin, via the JiggyBase ChatCompletion API, or via chat.jiggy.ai.   You have full control over who can access to your collection.  
 
 For a `Collection` object (e.g., `my_collection = jb.collection("<collection_name>")`), you have access to the following methods:
 
-(adapt the usage code for each method accordingly)
-
-- `set_description(self, description: str)` - Updates the description of the collection.
-- `set_oauth_verification_token(self, openai_verification_token: str)` - Sets the OpenAI verification token for the collection's plugin.
-- `plugin_oauth_config()` - Retrieves the OAuth configuration for the collection's plugin.
-- `delete()` - Deletes the collection permanently.
-- `get_chat_config()` - Retrieves the chat configuration for the collection.
-- `update_chat_config(model: str, prompt_task_id: int)` - Updates the chat configuration for the collection.
 - `upsert_file(file_path: str[, mimetype: str = None])` - Uploads a file to the collection.
 - `upsert(documents: List[Document])` - Adds a list of `Document` objects to the collection.
 - `query(queries: Union[str, List[str], Query][, top_k : int = 10])` - Queries the collection and returns a `QueryResponse` object.
 - `get_doc(id: str)` - Retrieves a document by its ID.
 - `get_chunks([start: int = 0, limit: int = 10, reverse: bool = True])` - Iterates through the chunks in a collection.
 - `delete_docs([ids: Optional[List[str]] = None, document_metadata_filter: Optional[DocumentMetadataFilter] = None, delete_all: Optional[bool] = False])` - Deletes items in the collection by document IDs, metadata filter, or deletes all documents.
+- `set_description(self, description: str)` - Updates the description of the collection.
+- `delete()` - Deletes the collection permanently.
+- `get_chat_config()` - Retrieves the chat configuration for the collection.
 
 ### Organization User Management
+
+An organization supports multiple roles for members, including 'admin', 'member', and 'viewer'.   A viwer role can access the data in the collection for chat purposes.  A member can upload new documents to the collection.  
 
 - `members()` - Returns a list of `OrgMember` objects within the organization.
 - `add_member(email: str, role: OrgRole)` - Adds a new member to the organization with the given email and role.
 - `delete_member(email: str)` - Deletes a member from the organization using the given email.
 
 ### Organization Prompt Management
+
+JiggyBase supports user-customized prompts for the JiggyBase ChatCompletion API.   The following methods are provided to manage the customized prompts.
 
 - `prompt_tasks([name=None, version=None])` - Returns a list of `PromptTask` objects, optionally filtering by name and version.
 - `create_prompt_task(name: str, version: int, prompts: List[PromptMessage][, type: Optional[PromptTaskType] = None, description: Optional[str] = None])` - Creates a new `PromptTask` object with the specified parameters.
