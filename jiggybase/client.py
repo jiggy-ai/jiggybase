@@ -59,3 +59,10 @@ class JiggyBase():
             for collection in org.collections():
                 collections.append(collection)
         return collections
+
+    def collection(self, name : str) -> Collection:
+        for org in self.orgs():
+            for collection in org.collections():
+                if collection.name == name:
+                    return collection
+        raise ValueError(f'Collection "{name}" not found')
