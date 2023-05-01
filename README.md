@@ -28,6 +28,16 @@ After importing, you need to create a JiggyBase client object:
 jb = jiggybase.JiggyBase()
 ```
 
+Assuming you already created a collection 'my-collection', you can add files to the collection as follows:
+
+```python
+collection = jb.collection('my-collection')
+
+collection.upsert_file('/path/to/my/doc')
+
+# my doc is now available in the collection and can be accessed by the collection's ChatGPT plugin, via chat.jiggy.ai, or via the associated chat API endpoint.
+```
+
 
 ### Client methods
 
