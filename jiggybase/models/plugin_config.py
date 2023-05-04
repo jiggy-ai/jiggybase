@@ -2,7 +2,6 @@ import os
 from pydantic import BaseModel, HttpUrl, Field, validator
 from typing import List, Optional
 from enum import Enum
-from sqlmodel import SQLModel, Field
 from .collection import PluginAuthType        
 import re
 
