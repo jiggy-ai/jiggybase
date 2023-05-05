@@ -111,5 +111,5 @@ jiggybase_upload [--org <organization>] [--collection <collection>] [--dir <dire
 - `--dir`: The directory you want to upload.
 - `--file`: The file you want to upload.
 
-If neither `--file` nor `--dir` options are provided, the script will automatically process the last argument as a file or directory.
+If neither `--file` nor `--dir` options are provided, the script will automatically process other arguments as a file or directory.
 
