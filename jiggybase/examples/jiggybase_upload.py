@@ -31,7 +31,7 @@ def upload_directory(collection : jiggybase.models.Collection, dirname : str):
         upload_file(collection, fn)
 
 
-epilog = "If neither '--file' nor '--dir' options are provided, the script will automatically process the last argument as a file or directory"
+epilog = "If neither '--file' nor '--dir' options are provided, the script will automatically process other arguments as a file or directory"
 
 
 def main():
