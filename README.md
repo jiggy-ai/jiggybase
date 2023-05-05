@@ -96,14 +96,14 @@ JiggyBase supports user-customized prompts for the JiggyBase ChatCompletion API.
 - `get_prompt_task(prompt_task_id: int)` - Retrieves a `PromptTask` object using the given prompt_task_id.
 - `delete_prompt_task(prompt_task_id: int)` - Deletes a `PromptTask` object using the given prompt_task_id.
 
-## jiggybase_upload.py
+## jiggybase_upload
 
-This script allows you to upload files or directories to your JiggyBase collection using command-line arguments. It's included in the `jiggybase/examples` directory.
+This utility is installed via pip and allows you to upload files or directories to your JiggyBase collection using command-line arguments. It's included in the `jiggybase/examples` directory.
 
 #### Usage
 
 ```bash
-jiggybase_upload.py [--org <organization>] [--collection <collection>] [--dir <directory>] [--file <file>]
+jiggybase_upload [--org <organization>] [--collection <collection>] [--dir <directory>] [--file <file>]
 ```
 
 - `--org`: The name of your JiggyBase organization. Alternatively, set `JIGGYBASE_ORG` environment variable, or be a member of a single organization.
