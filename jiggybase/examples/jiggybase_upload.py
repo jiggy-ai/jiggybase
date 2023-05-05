@@ -26,7 +26,7 @@ def upload_directory(collection : jiggybase.models.Collection, dirname : str):
         print(f'uploaded {fn} as {doc_id}: chunk count {len(dcl)} text length {text_len} metadata {dcl[0].metadata}')
 
 
-def main(args):
+def main():
     parser = argparse.ArgumentParser(description="Upload a directory to a JiggyBase collection")
     parser.add_argument("--org", type=str, help="The name of your JiggyBase organization")
     parser.add_argument("--collection", type=str, help="The name of your JiggyBase collection")
@@ -36,7 +36,7 @@ def main(args):
         parser.print_help(sys.stderr)
         sys.exit(1)
 
-    parsed_args = parser.parse_args(args)
+    parsed_args = parser.parse_args(sys.argv[1:])
 
     if not parsed_args.org:
         orgs = jb.orgs()
@@ -66,4 +66,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
