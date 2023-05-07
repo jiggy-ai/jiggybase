@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field, BaseConfig, HttpUrl
 from enum import Enum
 from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
 from .jiggybase_session import JiggyBaseSession
-from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter, DocChunksRequest, DocChunksResponse
+from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter, DocChunksResponse
 import os
 import mimetypes
 
@@ -177,8 +177,8 @@ class Collection(collection.Collection):
         reverse - Reverse the order of the items returned; True to return newest first
         max_chunks_per_doc - maximum number of chunks to return for each document
         """
-        dcr = DocChunksRequest(index=index, limit=limit, reverse=reverse, max_chunks_per_doc=max_chunks_per_doc)
-        rsp = self.plugin_session.get("/doc_chunks", model=dcr)
+        params = {"index": index, "limit": limit, "reverse": reverse, "max_chunks_per_doc": max_chunks_per_doc}
+        rsp = self.plugin_session.get("/doc_chunks", params=params)
         dcr_rsp = DocChunksResponse.parse_obj(rsp.json())
         return dcr_rsp.docs, dcr_rsp.next_index
 
