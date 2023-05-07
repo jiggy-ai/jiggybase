@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jiggybase"
-version = "0.0.25"
+version = "0.0.26"
 authors = [
   { name="Bill Kish", email="bk@jiggy.ai" },
 ]
