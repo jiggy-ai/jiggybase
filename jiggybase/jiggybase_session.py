@@ -1,16 +1,24 @@
 # Jiggy Client
-
 import os
 from requests.auth import HTTPBasicAuth
 from requests.packages.urllib3 import Retry
 from requests.adapters import HTTPAdapter
 import requests
+from time import sleep
 from .login import window_open
 
 JIGGYBASE_HOST     = 'https://api.gpt-gateway.com'   # transition to jiggy.ai in progress
 
 JB_KEY_FILE = os.path.expanduser('~') + '/.jiggybase'   # local file to store user entered apikey 
 
+"""
+Retry the following status codes:
+500 Internal Server Error: The server encountered an error while processing the request.
+502 Bad Gateway: The server, while acting as a gateway, received an invalid response from the upstream server.
+503 Service Unavailable: The server is currently unable to handle the request due to maintenance or overload.
+504 Gateway Timeout: The server, while acting as a gateway, did not receive a timely response from the upstream server.
+"""
+RETRY_STATUS_CODES = [500, 502, 503, 504]
 
 class ClientError(Exception):
     """
@@ -48,12 +56,12 @@ class JiggyBaseSession(requests.Session):
             
         self.bearer_token = None
         super(JiggyBaseSession, self).mount('https://',
-                                        HTTPAdapter(max_retries=Retry(connect=5,
-                                                                      read=5,
-                                                                      status=5,
-                                                                      redirect=2,
-                                                                      backoff_factor=.001,
-                                                                      status_forcelist=(500, 502, 503, 504))))
+                                            HTTPAdapter(max_retries=Retry(connect=5,
+                                                                          read=5,
+                                                                          status=5,
+                                                                          redirect=2,
+                                                                          backoff_factor=.001,
+                                                                          status_forcelist=None)))
 
     def _set_bearer(self, jwt):
         self.bearer_token = jwt
@@ -94,18 +102,35 @@ class JiggyBaseSession(requests.Session):
         if not self.bearer_token:
             self._auth()
         url = self.prefix_url + url
-        #print("~~~~~~~~~~~~~~~~~~~~~~~~\n", method, url)
         # support 'model' (pydantic BaseModel) arg which we convert to json parameter
         if 'model' in kwargs:
             kwargs['data'] = kwargs.pop('model').json()
-        resp =  super(JiggyBaseSession, self).request(method, url, *args, **kwargs)
-        if resp.status_code == 401:
-            self.bearer_token = None
-            del self.headers['Authorization']
-            self._auth()
-            resp =  super(JiggyBaseSession, self).request(method, url, *args, **kwargs)
-        if resp.status_code in [500, 502, 503, 504]:
-            pass # TODO: retry these cases        
+
+        max_attempts = 7
+        backoff_factor = 0.5
+
+        for attempt in range(max_attempts):        
+            try:        
+                resp =  super(JiggyBaseSession, self).request(method, url, *args, **kwargs)
+            except Exception as e:
+                print(f"Exception: {e}")
+                if attempt == max_attempts - 1:
+                    raise
+                continue
+
+            if resp.status_code == 401:
+                self.bearer_token = None
+                del self.headers['Authorization']
+                self._auth()
+                if attempt == max_attempts - 1:
+                    print("Unable to authenticate")
+                    raise ValueError("Unable to authenticate")
+                continue
+            if resp.status_code not in RETRY_STATUS_CODES:
+                break
+            sleep_duration = backoff_factor * (2 ** attempt)
+            sleep(sleep_duration)
+            
         if resp.status_code >= 500:
             raise ServerError(resp.content)
         if resp.status_code >= 400:
