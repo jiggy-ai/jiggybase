@@ -3,7 +3,7 @@
 
 Yes, the documents you upload to a JiggyBase Collection are stored in a dedicated database separate from other collections and the data of other organizations.   Your data resides in a SOC2 Type 2 certified data center.    The team building and operating JiggyBase has prior experience with SOC2 certification and JiggyBase expects to be SOC2 Type 2 certified in early 2024.
 
-Your chat messages are currently not saved by JiggyBase.  While subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the final model completions, OpenAI does not use this data for model training purposes or otherwise permanently store it. 
+Your chat messages are currently not saved by JiggyBase.  While subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the final model completions, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
 
 
 # Can I easily get my data out of JiggyBase?
@@ -17,10 +17,10 @@ In the enterprise tier, there is even an option for JiggyBase to create ready-to
 
 Yes, the core of the JiggyBase service is based on the following open source packages:
 
-Collection Index and Search & ChatGPT Plugin
-JiggyBase Chat UI (chat.jiggy.ai)
-Hnsqlite (Database integrating sqlite & hnswlib for vector search)
-JiggyBase python client
+[Collection Index and Search & ChatGPT Plugin](https://github.com/jiggy-ai/jiggybase-chatgpt-retrieval-plugin)
+[JiggyBase Chat UI (chat.jiggy.ai)](https://github.com/jiggy-ai/jiggybase-chatbot-ui)
+[Hnsqlite (Database integrating sqlite & hnswlib for vector search)](https://github.com/jiggy-ai/hnsqlite)
+[JiggyBase python client](https://github.com/jiggy-ai/jiggybase)
 
 
 # What AI Models does JiggyBase use?
