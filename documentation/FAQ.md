@@ -17,10 +17,10 @@ In the enterprise tier, there is even an option for JiggyBase to create ready-to
 
 Yes, the core of the JiggyBase service is based on the following open source packages:
 
-[Collection Index and Search & ChatGPT Plugin](https://github.com/jiggy-ai/jiggybase-chatgpt-retrieval-plugin)
-[JiggyBase Chat UI (chat.jiggy.ai)](https://github.com/jiggy-ai/jiggybase-chatbot-ui)
-[Hnsqlite (Database integrating sqlite & hnswlib for vector search)](https://github.com/jiggy-ai/hnsqlite)
-[JiggyBase python client](https://github.com/jiggy-ai/jiggybase)
+- [Collection Index and Search & ChatGPT Plugin](https://github.com/jiggy-ai/jiggybase-chatgpt-retrieval-plugin)    
+- [JiggyBase Chat UI (chat.jiggy.ai)](https://github.com/jiggy-ai/jiggybase-chatbot-ui)
+- [Hnsqlite (Database integrating sqlite & hnswlib for vector search)](https://github.com/jiggy-ai/hnsqlite)
+- [JiggyBase python client](https://github.com/jiggy-ai/jiggybase)
 
 
 # What AI Models does JiggyBase use?
