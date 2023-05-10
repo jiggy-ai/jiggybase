@@ -1,3 +1,6 @@
+# What is JiggyBase?
+
+JiggyBase is a service that enables you to extend ChatGPT with your own knowledge and data. It works by searching your documents and providing the contents to ChatGPT in a way that allows it to respond using the knowledge and data found therein. This is the single most powerful technique to avoid ChatGPT hallucinations and adapt ChatGPT to work with custom and current data.
 
 # Is my data secure?
 
