@@ -119,6 +119,10 @@ Why it probably won’t work:  The current logic performs a query and reads 4-8 
 
 Please get in contact with us if you have workflows that require full document summarization, explicit comparison of different documents, or processing of entire documents to extract specific sets of information as we are working on extensions to JiggyBase to support these use cases.
 
+### What is the Collection description used for?
+
+The collection description is use to help inform the language model and chat users the purpose of a collection and the type of information that can be found within it.  It is also helpful to provide an example of the type of question that users could answer using this collection.
+
 
 ### Is JiggyBase SOC2 certified?
 
