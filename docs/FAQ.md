@@ -124,6 +124,9 @@ Please get in contact with us if you have workflows that require full document s
 
 Not currently,  but the team building and operating JiggyBase has prior experience with SOC2 certification and JiggyBase expects to be SOC2 Type 2 certified in early 2024.
 
+### Can I invite friends or co-workers to my JiggyBase Organization?
+
+Yes, JiggyBase is designed to work well for individuals, organizations, and teams.  You can invite others to your organization and control their level of access to Organization's collections.
 
 ### Who is JiggyBase?
 
