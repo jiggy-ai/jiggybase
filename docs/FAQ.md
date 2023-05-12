@@ -12,7 +12,7 @@ You can also utilize your JiggyBase collection as a ChatGPT plugin once OpenAI f
 
 Yes, the documents you upload to a JiggyBase Collection are stored in a dedicated database separate from other collections and the data of other organizations.   Your data resides in a SOC2 Type 2 certified data center.    The team building and operating JiggyBase has prior experience with SOC2 certification and JiggyBase expects to be SOC2 Type 2 certified in early 2024.
 
-Subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the final model completions, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
+Subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the AI model output, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
 
 
 ### Can I easily get my data out of JiggyBase?
