@@ -2,11 +2,17 @@
 
 JiggyBase is a service that enables you to extend ChatGPT with your own knowledge and data. It works by searching your documents and providing the contents to ChatGPT in a way that allows it to respond using the knowledge and data found therein. This is the single most powerful technique to avoid ChatGPT hallucinations and adapt ChatGPT to work with custom and current data.
 
+### Does this use ChatGPT?
+
+The JiggyBase chat service is powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data private.  
+
+You can also utilize your JiggyBase collection as a ChatGPT plugin once OpenAI fully makes the ChatGPT plugin features generally available. 
+
 ### Is my data secure?
 
 Yes, the documents you upload to a JiggyBase Collection are stored in a dedicated database separate from other collections and the data of other organizations.   Your data resides in a SOC2 Type 2 certified data center.    The team building and operating JiggyBase has prior experience with SOC2 certification and JiggyBase expects to be SOC2 Type 2 certified in early 2024.
 
-Your chat messages are currently not saved by JiggyBase.  While subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the final model completions, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
+Subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the final model completions, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
 
 
 ### Can I easily get my data out of JiggyBase?
