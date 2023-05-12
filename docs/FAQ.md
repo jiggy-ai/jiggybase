@@ -54,7 +54,7 @@ A page of text is considered to be about 500 words or about 700 tokens.   With e
 
 ### What is a Token?
 
-A token is the basic unit of text, usually a short word or part of a longer word, that forms the input and output to language processing models such as ChatGPT.  On average one token corresponds to 0.75 words in English.  In JiggyBase we define a page of text to be 1000 tokens, which is roughly equal to 500 words of text plus associated metadata. 
+Most JiggyBase users dont need to worry about tokens.  If you are interested, a token is the basic unit of text, usually a short word or part of a longer word, that forms the input and output to language processing models such as ChatGPT.  On average one token corresponds to 0.75 words in English.  In JiggyBase we define a page of text to be 1000 tokens, which is roughly equal to 500 words of text plus associated metadata. 
 
 
 ### When using chat with my collections, are the responses taking into account knowledge from outside my collection?
