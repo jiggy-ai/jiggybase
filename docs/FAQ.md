@@ -31,6 +31,11 @@ Yes, the core of the JiggyBase service is based on the following open source pac
 - [Hnsqlite (Database integrating sqlite & hnswlib for vector search)](https://github.com/jiggy-ai/hnsqlite)
 - [JiggyBase python client](https://github.com/jiggy-ai/jiggybase)
 
+### Who is behind JiggyBase?
+
+JiggyBase was founded in May 2023 by Amy Wang and Bill Kish, entrepreneurs who have worked together for over a decade at multiple startups.  Bill started his career as an early employee at several successful networking equipment startups after graduating from Carnegie Mellon University with a degree in Computer Engineering.  Amy narrowly escaped from Tsinghua University and earned her EE PhD from Columbia University, complete with a stint at Bell Labs.  Around 2004, Bill started Ruckus Wireless, which, after hiring Amy, grew to be the third largest enterprise WiFi company in the world, going public on the NYSE in 2012.  In 2015, Bill and Amy founded Cogniac, an industrial AI computer vision company which now has some of the largest scale industrial vision applications in production in the world. Their largest customer uses Cogniac to inspect millions of images a day to help prevent very bad things from happening to freight trains.  
+
+Now with JiggyBase they are excited to start building again.  Transformer neural network architectures trained on the sum of the Internet and scaled up with cleverness and compute result in something at least as magical as the previous tech mega-waves of semiconductors, internet, and mobile.  The applications of GPT-class models are going to touch every business in the world, multiple times over.  JiggyBase is building the fabric that allows this highly capable AI to work with and amplify the knowledge that makes your organization unique, while preserving that knowledge for the benefit of your organization.  
 
 ### What AI Models does JiggyBase use?
 
@@ -138,11 +143,8 @@ Not currently,  but the team building and operating JiggyBase has prior experien
 
 Yes, JiggyBase is designed to work well for individuals, organizations, and teams.  You can invite others to your organization and control their level of access to Organization's collections.
 
-### Who is JiggyBase?
+### Can I add web site to a Collection?
 
-JiggyBase was founded in May 2023 by Amy Wang and Bill Kish, entrepreneurs who have worked together for over a decade at multiple startups.  Bill started his career as an early employee at several successful networking equipment startups after graduating from Carnegie Mellon University with a degree in Computer Engineering.  Amy narrowly escaped from Tsinghua University and earned her EE PhD from Columbia University, complete with a stint at Bell Labs.  Around 2004, Bill started Ruckus Wireless, which, after hiring Amy, grew to be the third largest enterprise WiFi company in the world, going public on the NYSE in 2012.  In 2015, Bill and Amy founded Cogniac, an industrial AI computer vision company which now has some of the largest scale industrial vision applications in production in the world. Their largest customer uses Cogniac to inspect millions of images a day to help prevent very bad things from happening to freight trains.  
-
-Now with JiggyBase they are excited to start building again.  Transformer neural network architectures trained on the sum of the Internet and scaled up with cleverness and compute result in something at least as magical as the previous tech mega-waves of semiconductors, internet, and mobile.  The applications of GPT-class models are going to touch every business in the world, multiple times over.  JiggyBase is building the fabric that allows this highly capable AI to work with and amplify the knowledge that makes your organization unique, while preserving that knowledge for the benefit of your organization.  
-
+We currently support adding a single web page at a time by sending a url to the chat interface. We will extend this capability over time.   Not all sites are supported since many make it difficult to extract readable text.
 
 
