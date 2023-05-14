@@ -2,11 +2,17 @@
 
 JiggyBase is a service that enables you to extend ChatGPT with your own knowledge and data. It works by searching your documents and providing the contents to ChatGPT in a way that allows it to respond using the knowledge and data found therein. This is the single most powerful technique to avoid ChatGPT hallucinations and adapt ChatGPT to work with custom and current data.
 
+### Does this use ChatGPT?
+
+The JiggyBase chat service is powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data private.  
+
+You can also utilize your JiggyBase collection as a ChatGPT plugin once OpenAI fully makes the ChatGPT plugin features generally available. 
+
 ### Is my data secure?
 
 Yes, the documents you upload to a JiggyBase Collection are stored in a dedicated database separate from other collections and the data of other organizations.   Your data resides in a SOC2 Type 2 certified data center.    The team building and operating JiggyBase has prior experience with SOC2 certification and JiggyBase expects to be SOC2 Type 2 certified in early 2024.
 
-Your chat messages are currently not saved by JiggyBase.  While subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the final model completions, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
+Subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the AI model output, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
 
 
 ### Can I easily get my data out of JiggyBase?
@@ -42,13 +48,13 @@ A collection is a group of one or more documents that you upload to JiggyBase th
 
 ### What is a Page?
 
-A page of text is considered to be about 500 words or about 700 tokens.   With extra document metadata one page of text ends up closer to 900 tokens as represented in the database.   For simplicity (and as a bonus to our customers) we consider 1 page of text  to be 1000 tokens for JiggyBase accounting purposes. 
+A page of text is considered to be about 500 words of text. 
 
+### What doesa a page of text translate to and what is a token?
 
+A page of text translates to about 700 tokens.   With extra document metadata one page of text ends up closer to 900 tokens as represented in the database.   For simplicity (and as a bonus to our customers) we consider 1 page of text  to be 1000 tokens for JiggyBase accounting purposes. 
 
-### What is a Token?
-
-A token is the basic unit of text, usually a short word or part of a longer word, that forms the input and output to language processing models such as ChatGPT.  On average one token corresponds to 0.75 words in English.  In JiggyBase we define a page of text to be 1000 tokens, which is roughly equal to 500 words of text plus associated metadata. 
+Most JiggyBase users dont need to worry about tokens.  If you are interested, a token is the basic unit of text, usually a short word or part of a longer word, that forms the input and output of AI language models such as ChatGPT.  On average one token corresponds to 0.75 words in English.  In JiggyBase we define a page of text to be 1000 tokens, which is roughly equal to 500 words of text plus associated metadata. 
 
 
 ### When using chat with my collections, are the responses taking into account knowledge from outside my collection?
@@ -118,6 +124,10 @@ Why it probably won’t work:  The current logic performs a query and reads 4-8 
 
 
 Please get in contact with us if you have workflows that require full document summarization, explicit comparison of different documents, or processing of entire documents to extract specific sets of information as we are working on extensions to JiggyBase to support these use cases.
+
+### What is the Collection description used for?
+
+The collection description is use to help inform the language model and chat users the purpose of a collection and the type of information that can be found within it.  It is also helpful to provide an example of the type of question that users could answer using this collection.
 
 
 ### Is JiggyBase SOC2 certified?
