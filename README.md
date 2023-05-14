@@ -48,6 +48,7 @@ These are the top level methods of th `JiggyBase` client, primarily used for get
 - `api_keys()` - Returns a list of the user's `ApiKey` objects.
 - `authenticated_user()` - Returns the authenticated user's `User` object.
 - `collections()` - Returns a list of all `Collection` objects in all organizations the user is a member of.
+- `collection_names()` - Returns a list of unique `Collection` names within the organization.
 - `collection(name: str)` - Returns the `Collection` object matching the given name.
 
 ### Organization

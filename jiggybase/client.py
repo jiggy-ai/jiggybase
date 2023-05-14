@@ -60,6 +60,16 @@ class JiggyBase():
                 collections.append(collection)
         return collections
 
+    def collection_names(self) -> List[Collection]:
+        """
+        return the unique collection name for all collections in all Orgs that the user is a member of
+        """
+        names = []
+        for org in self.orgs():
+            for collection in org.collections():
+                names.append(collection.name)
+        return names
+            
     def collection(self, name : str) -> Collection:
         for org in self.orgs():
             for collection in org.collections():
