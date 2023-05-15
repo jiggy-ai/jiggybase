@@ -1,12 +1,12 @@
-from typing import Optional, Tuple, List
+import os
+from typing import Optional, List, Iterator
 from pydantic import BaseModel, Field, BaseConfig, HttpUrl
 from enum import Enum
 from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
 from .jiggybase_session import JiggyBaseSession
 from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter, DocChunksResponse
 from .models import Message, CompletionRequest, ChatCompletion
-import os
-
+from .chat_stream import extract_content_from_sse_bytes
 
 from typing import Union, List
 class PluginAuthType(Enum):
@@ -61,7 +61,7 @@ class Collection(collection.Collection):
         super().__init__(*args, **kwargs)
         self.session = session
         self.plugin_session = JiggyBaseSession(host=f'https://{kwargs["fqdn"]}', api='')
-        self.chat_session = JiggyBaseSession(api='v1')
+        self.chat_session = JiggyBaseSession(host=session.host, api='v1')
         
     def set_description(self, description:str) -> "Collection":
         """
@@ -168,7 +168,6 @@ class Collection(collection.Collection):
         return [DocumentChunk.parse_obj(chunk) for chunk in rsp.json()]
 
 
-
     def delete_docs(self, 
                     ids                      : Optional[List[str]] = None, 
                     document_metadata_filter : Optional[DocumentMetadataFilter] = None, 
@@ -199,4 +198,22 @@ class Collection(collection.Collection):
         rsp = self.chat_session.post("/chat/completions", model=cr)                      
         return ChatCompletion.parse_obj(rsp.json())
 
-                        
+    def _chat_completion_stream_str(self, 
+                         messages: List[Message],
+                         model = 'gpt-3.5-turbo',
+                         max_tokens = None,
+                         temperature = .1) -> Iterator[str]:
+        """
+        low level interface for chat completion with streaming
+        yields the model output as an iteration of strings
+        """
+        cr = CompletionRequest(model       = f'{self.name}_{model}', 
+                               messages    = messages,
+                               max_tokens  = max_tokens,
+                               temperature = temperature,
+                               stream      = True)
+        rsp = self.chat_session.post("/chat/completions", model=cr, stream=True)
+        for line in rsp.iter_lines():
+            if line:  # filter out keep-alive newlines        
+                yield extract_content_from_sse_bytes(line)
+                

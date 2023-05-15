@@ -7,7 +7,7 @@ import requests
 from time import sleep
 from .login import window_open
 
-JIGGYBASE_HOST     = 'https://api.gpt-gateway.com'   # transition to jiggy.ai in progress
+JIGGYBASE_HOST     = os.environ.get('JIGGYBASE_HOST', 'https://api.gpt-gateway.com')   # transition to jiggy.ai in progress
 
 JB_KEY_FILE = os.path.expanduser('~') + '/.jiggybase'   # local file to store user entered apikey 
 
@@ -42,7 +42,7 @@ class JiggyBaseSession(requests.Session):
 
         api:  The api & version to use. defaults to 'gpt-gateway-v1'
                 
-        final url prefix are of the form "https:/{host}/{api}"
+        final url prefix are of the form "https://{host}/{api}"
         """
         super(JiggyBaseSession, self).__init__(*args, **kwargs)
         if not host.startswith('http'):
