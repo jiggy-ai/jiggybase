@@ -4,7 +4,7 @@ collection = jiggybase.JiggyBase().collection('hackernews-summary')   # replace 
 
 messages = [{'role':'user',  'content': 'articles about python 3.11'}]
 
-rsp = collection._chat_completion(messages)
+rsp = collection._chat_completion(messages)   # note _ as this is preliminary low-level interface
 
 print(rsp)
 
