@@ -43,13 +43,14 @@ The document is now available in the collection and can be accessed by the colle
 
 These are the top level methods of th `JiggyBase` client, primarily used for getting the user's organizations or all collections across all organizations.
 
+- `collection_names()` - Returns a list of all of the `Collection` names that the user can access
+- `collection(name: str)` - Returns the `Collection` object matching the given name.
+- `collections()` - Returns a list of all `Collection` objects in all organizations the user is a member of.
 - `orgs()` - Returns a list of `Org` objects the user is a member of.
 - `get_org(name_or_id: str)` - Returns the `Org` object matching the given name or ID.
 - `api_keys()` - Returns a list of the user's `ApiKey` objects.
 - `authenticated_user()` - Returns the authenticated user's `User` object.
-- `collections()` - Returns a list of all `Collection` objects in all organizations the user is a member of.
-- `collection_names()` - Returns a list of unique `Collection` names within the organization.
-- `collection(name: str)` - Returns the `Collection` object matching the given name.
+
 
 ### Organization
 
@@ -59,7 +60,6 @@ For an `Org` object (e.g., `my_org = jb.get_org("<org_name>")`), you have access
 
 - `collections()` - Returns a list of `Collection` objects within the organization.
 - `collection(name: str)` - Returns the `Collection` object matching the given name.
-
 - `update([name: Optional[str] = None, description: Optional[str] = None])` - Updates the organization's name or description.
 
 
