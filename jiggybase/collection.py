@@ -196,10 +196,7 @@ class Collection(collection.Collection):
                                temperature = temperature,
                                stream      = False)
         rsp = self.chat_session.post("/chat/completions", model=cr)          
-        try:            
-            return ChatCompletion.parse_obj(rsp.json())
-        except:
-            return ChatUsage.parse_obj(rsp.json())  # transitional hack
+        return ChatCompletion.parse_obj(rsp.json())
 
     def _chat_completion_stream_str(self, 
                          messages: List[Message],
