@@ -4,7 +4,7 @@ Config for chat-related functionality
 
 from pydantic import BaseModel, Field
 from .chatmodel import ChatModelName
-from typing import Optional
+from typing import Optional, List
 
 
 class CollectionChatConfig(BaseModel):
@@ -36,10 +36,35 @@ class CompletionRequest(BaseModel):
     stream: bool
 
 
-# Response returned from JiggyBase Chat Completion api endpoint
-# While the inputs to our chat completion api are similar to OpenAI, the output response model is quite different:
+
+
+class Choice(BaseModel):
+    finish_reason: str
+    index: int
+    message: Message
+
+class Usage(BaseModel):
+    completion_tokens: int
+    prompt_tokens: int
+    total_tokens: int
 
 class ChatCompletion(BaseModel):
+    id: str
+    choices: List[Choice]
+    created: int
+    model: str
+    object: str
+    usage: Usage
+
+    def __str__(self):
+        return self.choices[0].message.content
+    
+
+
+class ChatUsage(BaseModel):
+    """
+    JiggyBase chat completion that was temporarily used before transitioning to the OpenAI ChatCompletion
+    """
     collection_id:   int           = Field(description="The collection ID used to inform the completion")
     model:           str           = Field(description="The name of the model used to generate the completion")
     user_message:    str           = Field(description="The user's input message")

@@ -5,7 +5,7 @@ from enum import Enum
 from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
 from .jiggybase_session import JiggyBaseSession
 from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter, DocChunksResponse
-from .models import Message, CompletionRequest, ChatCompletion
+from .models import Message, CompletionRequest, ChatCompletion, ChatUsage
 from .chat_stream import extract_content_from_sse_bytes
 
 from typing import Union, List
@@ -195,8 +195,11 @@ class Collection(collection.Collection):
                                max_tokens  = max_tokens,
                                temperature = temperature,
                                stream      = False)
-        rsp = self.chat_session.post("/chat/completions", model=cr)                      
-        return ChatCompletion.parse_obj(rsp.json())
+        rsp = self.chat_session.post("/chat/completions", model=cr)          
+        try:            
+            return ChatCompletion.parse_obj(rsp.json())
+        except:
+            return ChatUsage.parse_obj(rsp.json())  # transitional hack
 
     def _chat_completion_stream_str(self, 
                          messages: List[Message],
