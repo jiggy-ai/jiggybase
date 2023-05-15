@@ -45,6 +45,8 @@ class JiggyBaseSession(requests.Session):
         final url prefix are of the form "https:/{host}/{api}"
         """
         super(JiggyBaseSession, self).__init__(*args, **kwargs)
+        if not host.startswith('http'):
+            host = f"https://{host}" if not host.startswith('localhost') else f'http://{host}'
         self.host = host
         if api:
             self.prefix_url = f"{host}/{api}"

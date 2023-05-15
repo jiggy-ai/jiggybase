@@ -4,8 +4,9 @@ from enum import Enum
 from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
 from .jiggybase_session import JiggyBaseSession
 from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter, DocChunksResponse
+from .models import Message, CompletionRequest, ChatCompletion
 import os
-import mimetypes
+
 
 from typing import Union, List
 class PluginAuthType(Enum):
@@ -60,7 +61,8 @@ class Collection(collection.Collection):
         super().__init__(*args, **kwargs)
         self.session = session
         self.plugin_session = JiggyBaseSession(host=f'https://{kwargs["fqdn"]}', api='')
-
+        self.chat_session = JiggyBaseSession(api='v1')
+        
     def set_description(self, description:str) -> "Collection":
         """
         Update an existing collection using its ID and the provided description.
@@ -178,4 +180,23 @@ class Collection(collection.Collection):
         delete_request = DeleteRequest(ids=ids, filter=document_metadata_filter, delete_all=delete_all)
         rsp = self.plugin_session.delete("/delete", model=delete_request)
         return DeleteResponse.parse_obj(rsp.json())
-        
+
+
+    def _chat_completion(self, 
+                         messages: List[Message],
+                         model = 'gpt-3.5-turbo',
+                         max_tokens = None,
+                         temperature = .1) -> ChatCompletion:
+        """
+        low level interface for chat completion
+        The input here mirrors openai chat completion parameters, while the output is different
+        """
+        cr = CompletionRequest(model       = f'{self.name}_{model}', 
+                               messages    = messages,
+                               max_tokens  = max_tokens,
+                               temperature = temperature,
+                               stream      = False)
+        rsp = self.chat_session.post("/chat/completions", model=cr)                      
+        return ChatCompletion.parse_obj(rsp.json())
+
+                        
