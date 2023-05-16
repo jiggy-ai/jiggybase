@@ -148,3 +148,9 @@ Yes, JiggyBase is designed to work well for individuals, organizations, and team
 We currently support adding a single web page at a time by sending a url to the chat interface. We will extend this capability over time.   Not all sites are supported since many make it difficult to extract readable text.
 
 
+### I have OpenAI ChatGPT Plugin Developer Access, can I use JiggyBase as a ChatGPT plugin?
+
+Yes, contact us support@jiggy.ai and we will send you a pre-installed plugin URL that uses OAuth to securely access your collections.
+
+
+
