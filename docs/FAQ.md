@@ -55,7 +55,7 @@ A collection is a group of one or more documents that you upload to JiggyBase th
 
 A page of text is considered to be about 500 words of text. 
 
-### What doesa a page of text translate to and what is a token?
+### What does a a page of text translate to and what is a token?
 
 A page of text translates to about 700 tokens.   With extra document metadata one page of text ends up closer to 900 tokens as represented in the database.   For simplicity (and as a bonus to our customers) we consider 1 page of text  to be 1000 tokens for JiggyBase accounting purposes. 
 
