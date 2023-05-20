@@ -55,7 +55,7 @@ A collection is a group of one or more documents that you upload to JiggyBase th
 
 A page of text is considered to be about 500 words of text. 
 
-### What doesa a page of text translate to and what is a token?
+### What does a a page of text translate to and what is a token?
 
 A page of text translates to about 700 tokens.   With extra document metadata one page of text ends up closer to 900 tokens as represented in the database.   For simplicity (and as a bonus to our customers) we consider 1 page of text  to be 1000 tokens for JiggyBase accounting purposes. 
 
@@ -146,5 +146,11 @@ Yes, JiggyBase is designed to work well for individuals, organizations, and team
 ### Can I add web site to a Collection?
 
 We currently support adding a single web page at a time by sending a url to the chat interface. We will extend this capability over time.   Not all sites are supported since many make it difficult to extract readable text.
+
+
+### I have OpenAI ChatGPT Plugin Developer Access, can I use JiggyBase as a ChatGPT plugin?
+
+Yes, contact us support@jiggy.ai and we will send you a pre-installed plugin URL that uses OAuth to securely access your collections.
+
 
 
