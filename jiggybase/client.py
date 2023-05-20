@@ -54,25 +54,20 @@ class JiggyBase():
         """
         return all Collections in all Orgs that the user is a member of
         """
-        collections = []
-        for org in self.orgs():
-            for collection in org.collections():
-                collections.append(collection)
-        return collections
-
+        resp = self.session.get("/collections")
+        return [Collection(self.session, **c) for c in resp.json()]
+   
     def collection_names(self) -> List[Collection]:
         """
         return the unique collection name for all collections in all Orgs that the user is a member of
         """
-        names = []
-        for org in self.orgs():
-            for collection in org.collections():
-                names.append(collection.name)
-        return names
+        return [c.name for c in self.collections()]
             
-    def collection(self, name : str) -> Collection:
-        for org in self.orgs():
-            for collection in org.collections():
-                if collection.name == name:
-                    return collection
+    def collection(self, name : str) -> Collection:        
+        """
+        return a collection of the specified name
+        """
+        for collection in self.collections():
+            if collection.name == name or collection.display_name.lower() == name.lower():
+                return collection
         raise ValueError(f'Collection "{name}" not found')

@@ -7,6 +7,8 @@ from .jiggybase_session import JiggyBaseSession
 from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter, DocChunksResponse
 from .models import Message, CompletionRequest, ChatCompletion, ChatUsage
 from .chat_stream import extract_content_from_sse_bytes
+from .models import ExtractMetadataConfig
+
 
 from typing import Union, List
 class PluginAuthType(Enum):
@@ -216,4 +218,17 @@ class Collection(collection.Collection):
         for line in rsp.iter_lines():
             if line:  # filter out keep-alive newlines        
                 yield extract_content_from_sse_bytes(line)
-                
+
+    def get_extract_metadata_config(self):
+        """
+        Get the metadata configuration for this collection.
+        """
+        rsp = self.session.get(f"/orgs/{self.org_id}/collections/{self.id}/extract_metadata_config")
+        return ExtractMetadataConfig(**rsp.json())
+
+    def patch_extract_metadata_config(self, config: ExtractMetadataConfig):
+        """
+        Get the metadata configuration for this collection.
+        """
+        rsp = self.session.patch(f"/orgs/{self.org_id}/collections/{self.id}/extract_metadata_config", model=config)
+        return ExtractMetadataConfig(**rsp.json())    
