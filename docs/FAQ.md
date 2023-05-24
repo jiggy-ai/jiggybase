@@ -14,6 +14,9 @@ Yes, the documents you upload to a JiggyBase Collection are stored in a dedicate
 
 Subsets of your data and chat messages are sent to OpenAI via their APIs in order to provide the AI model output, [OpenAI does not use this data](https://openai.com/policies/api-data-usage-policies) for model training purposes or otherwise permanently store it. 
 
+### Will you sign an NDA to cover the data we upload to JiggyBase?
+
+Sure, send us your NDA or you can request our [standard MNDA](https://app.commonpaper.com/pages/9752456e6f721fbf).
 
 ### Can I easily get my data out of JiggyBase?
 
