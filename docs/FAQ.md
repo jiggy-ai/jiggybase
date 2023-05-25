@@ -24,7 +24,6 @@ Yes, we make it easy for you to get your data out of JiggyBase.  You can downloa
 
 In the enterprise tier, there is even an option for JiggyBase to create ready-to-run docker container images with your latest data, so you can run your collections in production in your own infrastructure!
 
-
 ### Is JiggyBase open source?
 
 Yes, the core of the JiggyBase service is based on the following open source packages:
@@ -156,4 +155,6 @@ We currently support adding a single web page at a time by sending a url to the 
 Yes, contact us support@jiggy.ai and we will send you a pre-installed plugin URL that uses OAuth to securely access your collections.
 
 
+### Can I create unlimited number of trial accounts and use your awesomely augmented GPT-4 indefinitely for free?
 
+Sorry, no, that is a violation of our terms of service. Also consider that the same AI embedding technology that allows us to help answer your questions so effectively also helps us detect duplicate accounts since duplicate accounts tend to chat against the same types of data with the same types of questions...
