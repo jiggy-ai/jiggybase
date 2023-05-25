@@ -32,7 +32,7 @@ class ServerError(Exception):
 
     
 class JiggyBaseSession(requests.Session):
-    def __init__(self, host=JIGGYBASE_HOST, api='gpt-gateway-v1',  *args, **kwargs):
+    def __init__(self, host=JIGGYBASE_HOST, api='gpt-gateway-v1', bearer_token=None, *args, **kwargs):
         """
         Extend requests.Session with common GPTG authentication, retry, and exceptions.
 
@@ -41,7 +41,9 @@ class JiggyBaseSession(requests.Session):
                     JIGGYBASE_HOST environment variable or "api.gpt-gateway.com" as final default.
 
         api:  The api & version to use. defaults to 'gpt-gateway-v1'
-                
+
+        bearer_token:  usually None, but can be specified if this is used by an endpoint has already has one handy
+        
         final url prefix are of the form "https://{host}/{api}"
         """
         super(JiggyBaseSession, self).__init__(*args, **kwargs)
@@ -51,12 +53,9 @@ class JiggyBaseSession(requests.Session):
         if api:
             self.prefix_url = f"{host}/{api}"
         else:
-            self.prefix_url = host            
-        test_url = f"{self.prefix_url}/docs"
-        if requests.head(test_url).status_code != 200:
-            raise Exception(f"Invalid or unreachable api: {self.prefix_url}")
+            self.prefix_url = host          
             
-        self.bearer_token = None
+        self.bearer_token = bearer_token
         super(JiggyBaseSession, self).mount('https://',
                                             HTTPAdapter(max_retries=Retry(connect=5,
                                                                           read=5,
@@ -83,7 +82,7 @@ class JiggyBaseSession(requests.Session):
             self._getjwt(os.environ['JIGGYBASE_API_KEY'])
         elif os.path.exists(JB_KEY_FILE):
             self._getjwt(open(JB_KEY_FILE).read())
-        else:
+        else: ## check interactive?
             while True:
                 window_open("https://jiggy.ai/authorize")
                 key_input = input("Enter your JiggyBase API Key: ")

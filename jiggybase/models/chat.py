@@ -36,6 +36,8 @@ class CompletionRequest(BaseModel):
     stream: bool
 
 
+class TypedCompletionRequest(CompletionRequest):
+    json_schema : str
 
 
 class Choice(BaseModel):
@@ -73,6 +75,7 @@ class ChatUsage(BaseModel):
     messages_json:   Optional[str] = Field(description="JSON representation of the input messages sent to model endpoint")    
     completion:      Optional[str] = Field(description="The completion text returned by the model")
     created_at:      float         = Field(description="The epoch timestamp associated with the completion.")
+    endpoint:        str           = Field(description="The JiggyBase endpoint that requested the model completion")
     
     def __str__(self):
         return self.completion

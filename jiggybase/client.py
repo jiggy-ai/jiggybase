@@ -3,8 +3,8 @@ from .org import Org
 from .collection import Collection
 from .models.user import User, ApiKey
 from .jiggybase_session import JiggyBaseSession
-
-    
+from .models.chat import Message, TypedCompletionRequest
+from pydantic import BaseModel    
 
 class JiggyBase():
 
@@ -71,3 +71,37 @@ class JiggyBase():
             if collection.name == name or collection.display_name.lower() == name.lower():
                 return collection
         raise ValueError(f'Collection "{name}" not found')
+
+
+    def _extract_typed_completion(self,
+                                 messages       : List[Message],
+                                 pydantic_model : BaseModel,
+                                 temperature    : float = 0,
+                                 model          : str   = 'gpt-3.5-turbo') -> BaseModel:
+        """
+        lower-level interface to the extract_typed_completion endpoint
+        """
+        tcr = TypedCompletionRequest(model       = model, 
+                                     messages    = messages,
+                                     json_schema = pydantic_model.schema_json(),
+                                     temperature = temperature,
+                                     stream      = False)
+        
+        rsp = self.session.post("/extract/typed_completions", model=tcr)
+        return pydantic_model.parse_obj(rsp.json())
+
+
+    def  extract_typed_completion(self,
+                                  content       : str,
+                                  pydantic_model : BaseModel, 
+                                  temperature    : float = 0,
+                                  model          : str   = 'gpt-3.5-turbo') -> BaseModel:
+        """
+        Higher-level interface to structured extraction from unstructured content.
+        Just provide the unstructured text and the pydantic model to extract.
+        """
+        # Set up messages
+        messages = [{"role": "user", "content": f"Extract the {pydantic_model.__name__} information from the following content:"},
+                    {"role": "user", "content": content}]
+
+        return self._extract_typed_completion(messages, pydantic_model, temperature, model)
