@@ -4,9 +4,11 @@ JiggyBase is a service that enables you to extend ChatGPT with your own knowledg
 
 ### Does this use ChatGPT?
 
-The JiggyBase chat service is powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data private.  
+Yes, there are two different ways you can chat with ChatGPT using the knowledge in your JiggyBase documents.  
 
-You can also utilize your JiggyBase collection as a ChatGPT plugin once OpenAI fully makes the ChatGPT plugin features generally available. 
+JiggyBase is now available as a plugin on the ChatGPT Plugin store.  ChatGPT Plus subscribers can select it there and then chat with the GPT-4 plugin model which knows how to use JiggyBase to search through your document collections and use the information it finds there.
+
+The chat.jiggy.ai chat interface is another option powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data private. 
 
 ### Is my data secure?
 
