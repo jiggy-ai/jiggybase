@@ -8,7 +8,7 @@ Yes, there are two different ways you can chat with ChatGPT using the knowledge 
 
 JiggyBase is now available as a plugin on the ChatGPT Plugin store.  ChatGPT Plus subscribers can select it there and then chat with the GPT-4 plugin model which knows how to use JiggyBase to search through your document collections and use the information it finds there.
 
-The chat.jiggy.ai chat interface is another option powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data private. 
+The chat.jiggy.ai chat interface is another option powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data secure. 
 
 ### Is my data secure?
 
