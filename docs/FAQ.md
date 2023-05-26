@@ -82,14 +82,19 @@ We use your data to provide the JiggyBase service.  Our policy is to not otherwi
 
 
 ### How do I chat with my documents after uploading them?
-Click on the orange “Go To Chat” button in the upper left hand corner of the page and then select the collection that contains the information you want to use in your chat.
+
+Click on the orange “Go To Chat” button in the upper left hand corner of the page to chat via chat.jiggy.ai and then select the collection that contains the information you want to use in your chat.  
+
+Alternatively you can chat against your collections with ChatGPT Plus by enabling JiggyBase in the ChatGPT plugin store. 
 
 
 ### How do I select the documents that are used during a chat?
 
+When chatting via the ChatGPT plugin, the collection is automatically selected via ChatGPT based on your messages.  In some cases you might need to guide ChatGPT into the right collection, but this effort can be minimized by providing clear names and descriptions for your collections within the JiggyBase management console.
+
 From the chat.jiggy.ai chat interface you can choose a collection from the dropdown menu that is used to inform the ChatGPT model completions with the relevant contents of the documents in that collection.  The chat currently works with one collection at a time, but you can change the  collection used for chat at any time.
 
-### What is happening behind the scenes when I chat?
+### What is happening behind the scenes when I chat on chat.jiggy.ai?
 
 1. We take the last few messsages from your current chat history and run it through a query to GPT-3.5 where we ask GPT-3.5 to reformulate your message as a search query 
 
