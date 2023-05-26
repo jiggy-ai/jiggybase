@@ -160,3 +160,12 @@ We currently support adding a single web page at a time by sending a url to the 
 ### Can I create unlimited number of trial accounts and use your awesomely augmented GPT-4 indefinitely for free?
 
 Sorry, no, that is a violation of our terms of service. Also consider that the same AI embedding technology that allows us to help answer your questions so effectively also helps us detect duplicate accounts since duplicate accounts tend to chat in the same style and with similar content as the original account.
+
+
+### Whats the difference between using JiggyBase with chat.jiggy.ai and with the ChatGPT Plugin?
+
+The JiggyBase chat app at chat.jiggy.ai currently only accesses a single collection at a time while the JiggyBase ChatGPT plugin can access all of your collections from a single chat session.  There are other subtle differences in how the search terms are composed to search your collection documents.  The chat.jiggy.ai interface is built on top of OpenAI APIs, but unlike the default ChatGPT terms of service, OpenAI will not use your chat messages for training purposes when using the chat.jiggy.ai interface.   
+
+One key difference is that when using the chat.jiggy.ai interfaces, your chat usage is subject to the message limit of your JiggyBase subscription plan tier.  When chatting via ChatGPT, you there is no per-message limit on JiggyBase and you are just subject to the normal ChatGPT rate limits.
+
+
