@@ -174,3 +174,11 @@ One key difference is that when using the chat.jiggy.ai interfaces, your chat us
 We are working to streamline the document ingestion process which at this point is not optimized for documents larger than several hundred pages or csv files with more than 10,000 records.  Larger documents, and in particularl csv files with > 10k records, may cause the collection to hang during ingestion or when trying to list the documents from the dashboard.  We are working to fix this, but if you run into this issue please do reach out so we can prioritize it appropriately. 
 
 
+### What causes the error message "No useable content found in documents"?
+
+We processed the document but were unable to find any text to use. An example would be a PDF that contains scanned text, as we currently do not support OCR.  We expect to support text extraction via OCR as well as other image data in the second half of 2023.  Please contact us to discuss accelerating support for these types of documents for enterprise use cases. 
+
+### What causes the error message "Error extracting text from file"?
+
+We encountered an unexpected error while processing the document.  We want to fix these errors, so if you can email us the document (under NDA) we will provide you with a coupon for a month of free service!
+
