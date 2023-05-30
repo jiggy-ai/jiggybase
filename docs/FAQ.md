@@ -169,3 +169,8 @@ The JiggyBase chat app at chat.jiggy.ai currently only accesses a single collect
 One key difference is that when using the chat.jiggy.ai interfaces, your chat usage is subject to the message limit of your JiggyBase subscription plan tier.  When chatting via ChatGPT, you there is no per-message limit on JiggyBase and you are just subject to the normal ChatGPT rate limits.
 
 
+### The JiggyBase console is stuck with the spinning logo, what is going on?
+
+We are working to streamline the document ingestion process which at this point is not optimized for documents larger than several hundred pages or csv files with more than 10,000 records.  Larger documents, and in particularl csv files with > 10k records, may cause the collection to hang during ingestion or when trying to list the documents from the dashboard.  We are working to fix this, but if you run into this issue please do reach out so we can prioritize it appropriately. 
+
+
