@@ -184,3 +184,35 @@ PDF documents also support features for encrypting the content and disabling pri
 
 JiggyBase encountered an unexpected error while processing the document.  We want to fix these errors, so if you can email us the document (under NDA) we will provide you with a coupon for a month of free service!
 
+
+### What file types are supported?
+
+- Microsoft Word (doc/docx)
+- Microsoft Excel (see limitations below)
+- Microsoft Powerpoint (text content only)
+- CSV
+- PDF
+- Text
+- Markdown
+
+
+### What are the limitations for Excel files?
+
+Currently we only support excel files that contain a single sheet per file.  Contact us if you have a use case that requires ingestion of many such files and we will prioritize this for you.
+
+We convert the excel sheet to csv before processing it. The data in the spreadsheet must be strictly in a tabular format.  Ideally the first row should contain a nice human readable name for each column. Very large (>10K rows) are slow to process (see CSV below).
+
+### What are the limitations for CSV files?
+
+Ideally the first row of the CSV file should contain the name of each column of data. Although this is not a strict requirement, it provides extra semantic context that helps the models make sense of your data. 
+
+Currently CSV files with more than 10K rows of data are slow to process and may hang.  Please contact us if you have a use case that requires ingestion of large csv files and we will prioritize the fix for this.
+
+
+### What are the limitations for PDF files?
+
+We do not currently support scanned PDF's.  Support for OCR is coming later in 2024.  Please contact us if you would like us to prioritize this.
+
+Some PDFs contain settings that prohibit text extraction or printing.  We are unable to process these to access the text content and will produce and error message.
+
+
