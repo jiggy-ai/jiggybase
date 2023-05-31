@@ -73,7 +73,7 @@ The JiggyBase chat is responding using data from your collection plus a distilla
 
 ### When using JiggyBase Chat, does the ChatGPT model use any internet search to help respond?
 
-No, there is not internet search function; there model is responding based on the text passages we provide from your collection, your recent messages, and a distillation of the data the model was originally trained trained on.
+No, there is no internet search function; the model is responding based on text passages selected from your collection, your recent messages, and a distillation of the data the model was originally trained trained on.
 
 
 ### What else do you do with my data?
@@ -120,7 +120,7 @@ Q: What does error code E407 mean for the turbo-encabulator?
 
 ### What type of tasks do not currently work well?
 
-While your document collection can me quite large (many 1000's of pages of text depending on the subscription plan), the language models are limited in how much information they can process at a time.  
+While your document collection can be quite large (many 1000's of pages of text depending on the subscription plan), the language models are limited in how much information they can process at a time.  
 
 The current algorithm looks at a maximum of 4 to 8 text pages of content (for GPT-3.5 and GPT-4 respectively) when answering your question.    Queries that require more than 4 to 8 pages of content to answer are currently not a good fit. 
 
@@ -171,14 +171,14 @@ One key difference is that when using the chat.jiggy.ai interfaces, your chat us
 
 ### The JiggyBase console is stuck with the spinning logo, what is going on?
 
-We are working to streamline the document ingestion process which at this point is not optimized for documents larger than several hundred pages or csv files with more than 10,000 records.  Larger documents, and in particularl csv files with > 10k records, may cause the collection to hang during ingestion or when trying to list the documents from the dashboard.  We are working to fix this, but if you run into this issue please do reach out so we can prioritize it appropriately. 
+We are working to streamline the document ingestion process which at this point is not optimized for documents larger than several hundred pages or csv files with more than 10,000 records.  Larger documents, and in particular csv files with > 10k records, may cause the collection to hang during ingestion or when trying to list the documents from the dashboard.  We are working to fix this, but if you run into this issue please do reach out so we can prioritize it appropriately. 
 
 
 ### What causes the error message "No useable content found in documents"?
 
 JiggyBase processed the document but was unable to find any text to use. An example would be a PDF that contains scanned text, as we do not currently support OCR.  We expect to support text extraction via OCR as well as support some image data in the second half of 2023.  Please contact us to discuss accelerating support for these types of documents for enterprise use cases. 
 
-PDF documents also support features for encrypting the content and disabling printing or text extraction.  It is possible that the PDF has these setting configured.
+PDF documents also support features for encrypting the content and disabling printing or text extraction.  It is possible that the PDF has these settings configured.
 
 ### What causes the error message "Error extracting text from file"?
 
@@ -198,7 +198,7 @@ JiggyBase encountered an unexpected error while processing the document.  We wan
 
 ### What are the limitations for Excel files?
 
-Currently we only support excel files that contain a single sheet per file.  Contact us if you have a use case that requires ingestion of many such files and we will prioritize this for you.
+Currently we only support excel files that contain a single sheet per file.  Contact us if you have a use case that requires many excel files with multiple sheets and we will prioritize this feature.
 
 We convert the excel sheet to csv before processing it. The data in the spreadsheet must be strictly in a tabular format.  Ideally the first row should contain a nice human readable name for each column. Very large (>10K rows) are slow to process (see CSV below).
 
@@ -213,6 +213,6 @@ Currently CSV files with more than 10K rows of data are slow to process and may 
 
 We do not currently support scanned PDF's.  Support for OCR is coming later in 2024.  Please contact us if you would like us to prioritize this.
 
-Some PDFs contain settings that prohibit text extraction or printing.  We are unable to process these to access the text content and will produce and error message.
+Some PDFs contain settings that prohibit text extraction or printing.  We are unable to process these to access the text content and will produce an error message.
 
 
