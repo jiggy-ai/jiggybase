@@ -33,12 +33,17 @@ class OrgMember(BaseModel):
     role:                OrgRole  = Field(description="The user's role in the org")
     accepted:            bool     = Field(description='True if the user has accepted the org membership.')
     
-     
+
+
 class Org(BaseModel):
-    id:              int           = Field(description='Internal org id')
-    name:            str           = Field(min_length=1, max_length=39, description='Unique name for this org.')
-    description:     Optional[str] = Field(default=None, description='Optional user supplied description.')
-    created_at:      float         = Field(description='The epoch timestamp when the org was created.')
-    updated_at:      float         = Field(description='The epoch timestamp when the org was updated.')
-    gpt4_credits:    int           = Field(description='The number of GPT-4 message credits currently available to the org users for chat.jiggy.ai.')
-    gpt3_5_credits:  int           = Field(description='The number of GPT-3 message credits currently available to the org users for chat.jiggy.ai.')
+    id:                  int           = Field(escription="Internal org id")
+    name:                str           = Field(max_length=39, description='Unique name for this org.')
+    description:         Optional[str] = Field(max_length=255, description='Optional user supplied description.')
+    created_at:          float         = Field(description='The epoch timestamp when the org was created.')
+    updated_at:          float         = Field(description='The epoch timestamp when the org was updated.')
+    created_by:          int           = Field(description='The user_id of the user that created the org.')
+    subscription_id:     str           = Field(description='The subscription_id for the org.')    
+    gpt4_credits:        int           = Field(description='The number of GPT-4 message credits currently available to the org users for chat.jiggy.ai.')
+    gpt3_5_credits:      int           = Field(description='The number of GPT-3 message credits currently available to the org users for chat.jiggy.ai.')
+    subscription_status: Optional[str] = Field(description='The stripe subscription status.')
+     
