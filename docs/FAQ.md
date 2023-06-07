@@ -221,8 +221,8 @@ The simplest way is to start your query with a reference to JiggyBase.  We have 
 
 ### How can I get ChatGPT to provide references?
 
-When JiggyBase searches your collections on behalf of ChatGPT, we return a lot of additional metadata along with the document content to help the GPT model make better sense of it.  We also include a reference URL which can be used to access each portion of original text material.
+When JiggyBase searches your collections on behalf of ChatGPT, JiggyBase returns a lot of additional metadata along with the document content to help the GPT model make better sense of it all.  We also include a reference URL which can be used to access each portion of the original text material.
 
-Often ChatGPT will provide these reference URLS on its own, but if it doesnt you can ask it to "provide references".  We are working to improve the presentation of the reference material and eventually want to be able to show you the relevant material in the format of the original document.  
+ChatGPT will often provide these reference URLS on its own, but if it doesnt you can ask it to "provide references".  We are working to improve the presentation of the reference material and eventually want to be able to show you the relevant material in the format of the original document.  
 
 
