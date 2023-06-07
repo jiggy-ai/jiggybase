@@ -8,48 +8,10 @@ from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertR
 from .models import Message, CompletionRequest, ChatCompletion, ChatUsage
 from .chat_stream import extract_content_from_sse_bytes
 from .models import ExtractMetadataConfig
-
+from .models import CollectionPatchRequest, PluginAuthConfigOAuth, PatchPluginOAuthConfigRequest
 
 from typing import Union, List
-class PluginAuthType(Enum):
-    bearer :str = "bearer"
-    none   :str = "none"
-    oauth  :str = "oauth"
 
-        
-class CollectionPostRequest(BaseModel):
-    """
-    Used to create a new Collection service
-    """
-    name:         str                      = Field(description="The globally unique hostname for the collection. Subject to DNS naming rules. ")
-    display_name: Optional[str]            = Field(description="The human friendly display name for the collection.")
-    description:  Optional[str]            = Field(description="A description of the collection.")
-    plugin_auth:  Optional[PluginAuthType] = Field(default=PluginAuthType.bearer, description="The authentication type to use for this collection's ChatGPT plugin.")
-
-
-class CollectionPatchRequest(BaseModel):
-    """
-    Used to modify an existing service
-    """
-    description:  Optional[str] = Field(description="A description of the collection.")
-    plugin_auth:  Optional[str] = Field(description='The auth plugin to use for this org.')
-    display_name: Optional[str] = Field(description="The human friendly display name for the collection.")
-
-
-
-class PluginAuthConfigOAuth(BaseModel):
-    """
-    The Plugin Oauth configuration as managed by GPT-Gateway
-    """    
-    client_url:                 HttpUrl     = Field(description="ChatGPT will direct the user’s browser to this url to log in to the plugin")
-    authorization_url:          HttpUrl     = Field(description="After successful login ChatGPT will complete the OAuth flow by making a POST request to this URL")
-    scope:                      str         = Field(description="The scope used for the OAuth flow")
-    client_id:                  str         = Field(unique=True, index=True, description="The client id to send to OpenAI for the plugin")
-    client_secret:              str         = Field(description="The client secret to send to OpenAI for the plugin")
-    openai_verification_token:  str         = Field(description="The verification token specified by OpenAI to configure in the plugin")
-
-class PatchPluginOAuthConfigRequest(BaseModel):
-    openai_verification_token: str  
 
         
 class Collection(collection.Collection):
@@ -71,7 +33,8 @@ class Collection(collection.Collection):
         """
         patch_request = CollectionPatchRequest(description=description)
         rsp = self.session.patch(f"/orgs/{self.org_id}/collections/{self.id}", model=patch_request)
-        return Collection(**rsp.json())
+        self.description = rsp.json()['description']
+
 
     def set_oauth_verification_token(self, openai_verification_token: str) -> PluginAuthConfigOAuth:
         """
@@ -232,3 +195,10 @@ class Collection(collection.Collection):
         """
         rsp = self.session.patch(f"/orgs/{self.org_id}/collections/{self.id}/extract_metadata_config", model=config)
         return ExtractMetadataConfig(**rsp.json())    
+
+    def __str__(self) -> str:
+        return f"Collection(id={self.id:4}, name={self.display_name:30}, hostname={self.hostname:30}, org_id={self.org_id:4},\n" \
+               f"           description='{self.description}')"
+
+    def __repr__(self) -> str:
+        return str(self)    

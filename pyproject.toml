@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jiggybase"
-version = "0.0.36"
+version = "0.1.0"
 authors = [
   { name="Bill Kish", email="bk@jiggy.ai" },
 ]
@@ -26,3 +26,4 @@ classifiers = [
 
 [project.scripts]
 jiggybase_upload = "jiggybase.examples.jiggybase_upload:main"
+ijiggy           = "jiggybase.ijiggy:main"

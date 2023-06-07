@@ -41,9 +41,9 @@ class Org(BaseModel):
     description:         Optional[str] = Field(max_length=255, description='Optional user supplied description.')
     created_at:          float         = Field(description='The epoch timestamp when the org was created.')
     updated_at:          float         = Field(description='The epoch timestamp when the org was updated.')
-    created_by:          int           = Field(description='The user_id of the user that created the org.')
+    created_by:          Optional[int] = Field(description='The user_id of the user that created the org.')
     subscription_id:     str           = Field(description='The subscription_id for the org.')    
     gpt4_credits:        int           = Field(description='The number of GPT-4 message credits currently available to the org users for chat.jiggy.ai.')
     gpt3_5_credits:      int           = Field(description='The number of GPT-3 message credits currently available to the org users for chat.jiggy.ai.')
-    subscription_status: Optional[str] = Field(description='The stripe subscription status.')
+    subscription_status: str           = Field(description='The stripe subscription status.')
      

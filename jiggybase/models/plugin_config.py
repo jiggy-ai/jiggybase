@@ -2,7 +2,7 @@ import os
 from pydantic import BaseModel, HttpUrl, Field, validator
 from typing import List, Optional
 from enum import Enum
-from .collection import PluginAuthType        
+from .plugin import PluginAuthType        
 import re
 
 MODELNAME = re.compile("[a-zA-Z][a-zA-Z0-9_]*")

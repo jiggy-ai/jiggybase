@@ -1,14 +1,15 @@
 
-from typing import Optional, List
+from typing import Any, Optional, List
 from pydantic import BaseConfig, EmailStr
 import enum
 
-from .collection import Collection, CollectionPostRequest
+from .models import  CollectionPostRequest
 
 from .models.org import Org as OrgModel
 from .models.org import OrgRole, OrgMember, OrgPatchRequest
 from .models import PromptTask, PromptMessage, PromptTaskPostRequest, PromptTaskType
 
+from .collection import Collection
     
 ###
 ## Org
@@ -23,11 +24,10 @@ class Org(OrgModel):
         self.session = session
         
     def create_collection(self, 
-                          name: str, 
                           display_name: str,
-                          plugin_auth: Optional[str] = "bearer",
                           description: Optional[str] = None) -> Collection:
         rsp = self.session.post(f"/orgs/{self.id}/collections", model=CollectionPostRequest(**locals()))
+        print(rsp.json())
         return Collection(self.session, **rsp.json())
 
     def collections(self) -> list[Collection]:
@@ -108,3 +108,9 @@ class Org(OrgModel):
 
     def delete_prompt_task(self, prompt_task_id: int):
         self.session.delete(f"/orgs/{self.id}/prompt_tasks/{prompt_task_id}")
+
+    def __str__(self) -> str:
+        return f"Org(id={self.id:4}, status={self.subscription_status:8}, gpt4_credts={self.gpt4_credits:4}, name={self.name:20}, description={self.description})"
+
+    def __repr__(self) -> str:
+        return str(self)

@@ -59,16 +59,23 @@ class JiggyBase():
    
     def collection_names(self) -> List[Collection]:
         """
-        return the unique collection name for all collections in all Orgs that the user is a member of
+        return the collection display names for all collections in all Orgs that the user is a member of
         """
-        return [c.name for c in self.collections()]
+        return [c.disply_name for c in self.collections()]
+
+    def collection_hostnames(self) -> List[Collection]:
+        """
+        return the unique collection hostname for all collections in all Orgs that the user is a member of
+        """
+        return [c.hostname for c in self.collections()]
+
             
     def collection(self, name : str) -> Collection:        
         """
-        return a collection of the specified name
+        return a collection of the specified display name or hostname
         """
         for collection in self.collections():
-            if collection.name == name or collection.display_name.lower() == name.lower():
+            if collection.hostname == name or collection.display_name.lower() == name.lower():
                 return collection
         raise ValueError(f'Collection "{name}" not found')
 
