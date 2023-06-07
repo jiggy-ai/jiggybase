@@ -215,4 +215,14 @@ We do not currently support scanned PDF's.  Support for OCR is coming later in 2
 
 Some PDFs contain settings that prohibit text extraction or printing.  We are unable to process these to access the text content and will produce an error message.
 
+### Sometimes ChatGPT doesn't use JiggyBase when it should. How to make ChatGPT use JiggyBase?
+
+The simplest way is to start your query with a reference to JiggyBase.  We have found that starting a chat with "per jiggybase," usually puts the GPT in the right mood to use JiggyBase.  You can also open with something like "in jiggybase collection XYZ," to further guide it.
+
+### How can i get ChatGPT to provide references?
+
+When JiggyBase searches your collections on behalf of ChatGPT, we return a lot of additional metadata along with the document content to help the GPT model make better sense of text.  We also include a reference URL which can be used to access each portion of original text material.
+
+Often ChatGPT will provide these reference URLS on its own, but if it doesnt you can ask it to "provide references".  We are working to improve the presentation of the reference material and eventually want to be able to show you the relevant material in the format of the original document.  
+
 
