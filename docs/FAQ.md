@@ -219,9 +219,9 @@ Some PDFs contain settings that prohibit text extraction or printing.  We are un
 
 The simplest way is to start your query with a reference to JiggyBase.  We have found that starting a chat with "per jiggybase," usually puts the GPT in the right mood to use JiggyBase.  You can also open with something like "in jiggybase collection XYZ," to further guide it.
 
-### How can i get ChatGPT to provide references?
+### How can I get ChatGPT to provide references?
 
-When JiggyBase searches your collections on behalf of ChatGPT, we return a lot of additional metadata along with the document content to help the GPT model make better sense of text.  We also include a reference URL which can be used to access each portion of original text material.
+When JiggyBase searches your collections on behalf of ChatGPT, we return a lot of additional metadata along with the document content to help the GPT model make better sense of it.  We also include a reference URL which can be used to access each portion of original text material.
 
 Often ChatGPT will provide these reference URLS on its own, but if it doesnt you can ask it to "provide references".  We are working to improve the presentation of the reference material and eventually want to be able to show you the relevant material in the format of the original document.  
 
