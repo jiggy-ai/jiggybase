@@ -6,7 +6,7 @@ collection = jiggybase.JiggyBase().collection('hackernews-summary')
 
 messages = [{'role':'user',  'content': 'articles about python 3.11'}]
 
-for outstr in collection._chat_completion_stream_str(messages):
+for outstr in collection._chat_completion_stream_str(messages, temperature=0):
     sys.stdout.write(outstr)
     sys.stdout.flush()
 print()
