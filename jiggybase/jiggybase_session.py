@@ -32,7 +32,7 @@ class ServerError(Exception):
 
     
 class JiggyBaseSession(requests.Session):
-    def __init__(self, host=JIGGYBASE_HOST, api='gpt-gateway-v1', bearer_token=None, *args, **kwargs):
+    def __init__(self, host=JIGGYBASE_HOST, api='gpt-gateway-v1', bearer_token=None, api_key=None, *args, **kwargs):
         """
         Extend requests.Session with common GPTG authentication, retry, and exceptions.
 
@@ -54,8 +54,15 @@ class JiggyBaseSession(requests.Session):
             self.prefix_url = f"{host}/{api}"
         else:
             self.prefix_url = host          
+
+        self.bearer_token = None            
+        self.api_key = None
+        if api_key:
+            self.api_key = api_key
+            self._getjwt(api_key)
+        elif bearer_token:
+            self._set_bearer(bearer_token)
             
-        self.bearer_token = bearer_token
         super(JiggyBaseSession, self).mount('https://',
                                             HTTPAdapter(max_retries=Retry(connect=5,
                                                                           read=5,

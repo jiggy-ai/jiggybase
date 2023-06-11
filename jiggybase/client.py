@@ -8,8 +8,8 @@ from pydantic import BaseModel
 
 class JiggyBase():
 
-    def __init__(self):
-        self.session = JiggyBaseSession()     
+    def __init__(self, api_key=None):
+        self.session = JiggyBaseSession(api_key=api_key)     
         
     def orgs(self) -> List[Org]:
         """

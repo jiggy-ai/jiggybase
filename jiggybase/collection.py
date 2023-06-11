@@ -23,9 +23,10 @@ class Collection(collection.Collection):
 
     def __init__(self, session, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.session = session
-        self.plugin_session = JiggyBaseSession(host=f'https://{kwargs["fqdn"]}', api='')
-        self.chat_session = JiggyBaseSession(host=session.host, api='v1')
+        self.session = session        
+        api_key = self.session.api_key
+        self.plugin_session = JiggyBaseSession(host=f'https://{kwargs["fqdn"]}', api='', api_key=api_key)
+        self.chat_session = JiggyBaseSession(host=session.host, api='v1', api_key=api_key)
         
     def set_description(self, description:str) -> "Collection":
         """
