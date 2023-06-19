@@ -36,15 +36,16 @@ class Source(str, Enum):
     chat = "chat"
     web  = "web"
 
+
 class DocumentMetadata(BaseModel):
     source: Optional[Source] = None
     source_id: Optional[str] = None
     url: Optional[str] = None
     created_at: Optional[str] = None
-    author: Union[str, list[str]] = None
+    author: Union[str, List[str]] = None
     title: Optional[str] = None
     description: Optional[str] = None
-    
+    language: Optional[str] = Field(description="The 2 character ISO 639-1 language code of the primary language of the content.")
 
 class DocumentChunkMetadata(DocumentMetadata):
     document_id: Optional[str] = None
