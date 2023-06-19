@@ -46,6 +46,7 @@ class DocumentMetadata(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
     language: Optional[str] = Field(description="The 2 character ISO 639-1 language code of the primary language of the content.")
+    version: str = None
 
 class DocumentChunkMetadata(DocumentMetadata):
     document_id: Optional[str] = None

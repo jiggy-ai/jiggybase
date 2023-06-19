@@ -5,11 +5,11 @@ from enum import Enum
 from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
 from .jiggybase_session import JiggyBaseSession
 from .models import UpsertResponse,  Query, QueryRequest, QueryResponse, UpsertRequest, Document, DocumentChunk, DeleteRequest, DeleteResponse, DocumentMetadataFilter, DocChunksResponse
-from .models import Message, CompletionRequest, ChatCompletion, ChatUsage
+from .models import Message, CompletionRequest, ChatCompletion 
 from .chat_stream import extract_content_from_sse_bytes
 from .models import ExtractMetadataConfig
 from .models import CollectionPatchRequest, PluginAuthConfigOAuth, PatchPluginOAuthConfigRequest
-
+from .models import DocumentMetadata
 from typing import Union, List
 
 
@@ -77,16 +77,25 @@ class Collection(collection.Collection):
         return CollectionChatConfig(**rsp.json())
 
  
-    def upsert_file(self, file_path: str, mimetype: str = None) -> UpsertResponse:
+    def upsert_file(self, file_path: str, mimetype: str = None, id: str = None, metadata : DocumentMetadata = None) -> UpsertResponse:
         """
         Add a file to the collection.
+        Mimetype can be specified, otherwise it will be inferred from the file extension.
+        The doc id can be specified, otherwise it will be generated.
+        Metadata can be specified, otherwise some metadata will be inferred from the file.
         """
         if not os.path.exists(file_path):
             raise ValueError("File not found")
-             
         with open(file_path, "rb") as file:
             files = {"file": (os.path.basename(file_path), file, mimetype)}
-            rsp = self.plugin_session.post("/upsert-file", files=files)
+            params = {'id': id} if id else {}
+            if metadata:
+                rsp = self.plugin_session.post("/upsert-file", 
+                                               files=files, 
+                                               params=params,
+                                               data={'metadata': metadata.json(exclude_unset=True)})
+            else:
+                rsp = self.plugin_session.post("/upsert-file", params=params, files=files)
         return UpsertResponse.parse_obj(rsp.json())
 
     def upsert(self, documents: List[Document]) -> UpsertResponse:
