@@ -227,4 +227,4 @@ ChatGPT will often provide these reference URLS on its own, but if it doesnt you
 
 ### ChatGPT plugin gives the error message "Error communicating with plugin service. Please try again later."
 
-The fix is to uninstall the JiggyBase plugin and re-install it. 
+The fix is to uninstall the JiggyBase plugin and re-install it. We are still investigating if something on our side leads to this issue or if it is an OpenAI issue.
