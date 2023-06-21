@@ -225,4 +225,6 @@ When JiggyBase searches your collections on behalf of ChatGPT, JiggyBase returns
 
 ChatGPT will often provide these reference URLS on its own, but if it doesnt you can ask it to "provide references".  We are working to improve the presentation of the reference material and eventually want to be able to show you the relevant material in the format of the original document.  
 
+### ChatGPT plugin gives the error message "Error communicating with plugin service. Please try again later."
 
+The fix is to uninstall the JiggyBase plugin and re-install it. We are still investigating if something on our side leads to this issue or if it is an OpenAI issue.
