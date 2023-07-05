@@ -1,5 +1,5 @@
 import os
-from typing import Optional, List, Iterator
+from typing import Optional, List, Iterator, Tuple
 from pydantic import BaseModel, Field, BaseConfig, HttpUrl
 from enum import Enum
 from .models import collection, CollectionChatConfig, PatchCollectionChatConfig
@@ -142,6 +142,22 @@ class Collection(collection.Collection):
         rsp = self.plugin_session.get("/chunks", params=params)
         return [DocumentChunk.parse_obj(chunk) for chunk in rsp.json()]
 
+    def get_doc_chunks(self, 
+                       index: int = -1, 
+                       limit: int = 10, 
+                       reverse: bool = True,
+                       max_chunks_per_doc = 1) -> Tuple[List[List[DocumentChunk]], int]:
+         """
+         low level interface for iterating through the initial chunks for all docs in a collection
+         index - index of the first result to return, should be -1 to start at the end
+         limit - Number of results to return starting from the offset
+         reverse - Reverse the order of the items returned; True to return newest first
+         max_chunks_per_doc - maximum number of chunks to return for each document
+         """
+         params = {"index": index, "limit": limit, "reverse": reverse, "max_chunks_per_doc": max_chunks_per_doc}
+         rsp = self.plugin_session.get("/doc_chunks", params=params)
+         dcr_rsp = DocChunksResponse.parse_obj(rsp.json())
+         return dcr_rsp.docs, dcr_rsp.next_index
 
     def delete_docs(self, 
                     ids                      : Optional[List[str]] = None, 
