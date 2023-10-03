@@ -1,0 +1,294 @@
+
+confluence = Confluence(CONFLUENCE_URL, username=CONFLUENCE_USER, password=ATLASSIAN_TOKEN)
+
+
+confluence.get_all_spaces()
+Out[40]: 
+{'results': [{'id': 98306,
+   'key': '~712020b56d19b968c247ef97e9cf98253b8722',
+   'name': 'Bill Kish',
+   'type': 'personal',
+   'status': 'current',
+   '_expandable': {'settings': '/rest/api/space/~712020b56d19b968c247ef97e9cf98253b8722/settings',
+    'metadata': '',
+    'operations': '',
+    'lookAndFeel': '/rest/api/settings/lookandfeel?spaceKey=~712020b56d19b968c247ef97e9cf98253b8722',
+    'identifiers': '',
+    'permissions': '',
+    'icon': '',
+    'description': '',
+    'theme': '/rest/api/space/~712020b56d19b968c247ef97e9cf98253b8722/theme',
+    'history': '',
+    'homepage': '/rest/api/content/98390'},
+   '_links': {'webui': '/spaces/~712020b56d19b968c247ef97e9cf98253b8722',
+    'self': 'https://jiggybase.atlassian.net/wiki/rest/api/space/~712020b56d19b968c247ef97e9cf98253b8722'}},
+  {'id': 65541,
+   'key': 'SD',
+   'name': 'Software Development',
+   'type': 'global',
+   'status': 'current',
+   '_expandable': {'settings': '/rest/api/space/SD/settings',
+    'metadata': '',
+    'operations': '',
+    'lookAndFeel': '/rest/api/settings/lookandfeel?spaceKey=SD',
+    'identifiers': '',
+    'permissions': '',
+    'icon': '',
+    'description': '',
+    'theme': '/rest/api/space/SD/theme',
+    'history': '',
+    'homepage': '/rest/api/content/65638'},
+   '_links': {'webui': '/spaces/SD',
+    'self': 'https://jiggybase.atlassian.net/wiki/rest/api/space/SD'}}],
+ 'start': 0,
+ 'limit': 500,
+ 'size': 2,
+ '_links': {'base': 'https://jiggybase.atlassian.net/wiki',
+  'context': '/wiki',
+  'self': 'https://jiggybase.atlassian.net/wiki/rest/api/space'}}
+
+
+pages = confluence.get_all_pages_from_space('SD')
+Out[51]: 
+[{'id': '65638',
+  'type': 'page',
+  'status': 'current',
+  'title': 'Software Development',
+  'macroRenderedOutput': {},
+  'extensions': {'position': 481},
+  '_expandable': {'container': '/rest/api/space/SD',
+   'metadata': '',
+   'restrictions': '/rest/api/content/65638/restriction/byOperation',
+   'history': '/rest/api/content/65638/history',
+   'body': '',
+   'version': '',
+   'descendants': '/rest/api/content/65638/descendant',
+   'space': '/rest/api/space/SD',
+   'childTypes': '',
+   'schedulePublishInfo': '',
+   'operations': '',
+   'schedulePublishDate': '',
+   'children': '/rest/api/content/65638/child',
+   'ancestors': ''},
+  '_links': {'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/65638',
+   'tinyui': '/x/ZgAB',
+   'editui': '/pages/resumedraft.action?draftId=65638',
+   'webui': '/spaces/SD/overview'}},
+ {'id': '65716',
+  'type': 'page',
+  'status': 'current',
+  'title': 'Get the most out of your software project space',
+  'macroRenderedOutput': {},
+  'extensions': {'position': 2547},
+  '_expandable': {'container': '/rest/api/space/SD',
+   'metadata': '',
+   'restrictions': '/rest/api/content/65716/restriction/byOperation',
+   'history': '/rest/api/content/65716/history',
+   'body': '',
+   'version': '',
+   'descendants': '/rest/api/content/65716/descendant',
+   'space': '/rest/api/space/SD',
+   'childTypes': '',
+   'schedulePublishInfo': '',
+   'operations': '',
+   'schedulePublishDate': '',
+   'children': '/rest/api/content/65716/child',
+   'ancestors': ''},
+  '_links': {'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/65716',
+   'tinyui': '/x/tAAB',
+   'editui': '/pages/resumedraft.action?draftId=65716',
+   'webui': '/spaces/SD/pages/65716/Get+the+most+out+of+your+software+project+space'}},
+ {'id': '98436',
+  'type': 'page',
+  'status': 'current',
+  'title': 'FAQ',
+  'macroRenderedOutput': {},
+  'extensions': {'position': 'none'},
+  '_expandable': {'container': '/rest/api/space/SD',
+   'metadata': '',
+   'restrictions': '/rest/api/content/98436/restriction/byOperation',
+   'history': '/rest/api/content/98436/history',
+   'body': '',
+   'version': '',
+   'descendants': '/rest/api/content/98436/descendant',
+   'space': '/rest/api/space/SD',
+   'childTypes': '',
+   'schedulePublishInfo': '',
+   'operations': '',
+   'schedulePublishDate': '',
+   'children': '/rest/api/content/98436/child',
+   'ancestors': ''},
+  '_links': {'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/98436',
+   'tinyui': '/x/hIAB',
+   'editui': '/pages/resumedraft.action?draftId=98436',
+   'webui': '/spaces/SD/pages/98436/FAQ'}},
+ {'id': '294918',
+  'type': 'page',
+  'status': 'current',
+  'title': 'Test Page With Embedded Docs',
+  'macroRenderedOutput': {},
+  'extensions': {'position': 3773},
+  '_expandable': {'container': '/rest/api/space/SD',
+   'metadata': '',
+   'restrictions': '/rest/api/content/294918/restriction/byOperation',
+   'history': '/rest/api/content/294918/history',
+   'body': '',
+   'version': '',
+   'descendants': '/rest/api/content/294918/descendant',
+   'space': '/rest/api/space/SD',
+   'childTypes': '',
+   'schedulePublishInfo': '',
+   'operations': '',
+   'schedulePublishDate': '',
+   'children': '/rest/api/content/294918/child',
+   'ancestors': ''},
+  '_links': {'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/294918',
+   'tinyui': '/x/BoAE',
+   'editui': '/pages/resumedraft.action?draftId=294918',
+   'webui': '/spaces/SD/pages/294918/Test+Page+With+Embedded+Docs'}}]
+
+
+
+open(pages[2]['title']+'.doc', 'wb').write(confluence.get_page_as_word(pages[2]['id']))
+
+
+
+r = confluence.get_attachments_from_content(pages[3]['id'])
+
+In [69]: r
+Out[69]: 
+{'results': [{'id': 'att33117',
+   'type': 'attachment',
+   'status': 'current',
+   'title': 'Surron_LBX_Dual-Sport_E-Dirt_Bike_Owners_Manual.pdf',
+   'macroRenderedOutput': {},
+   'metadata': {'mediaType': 'application/pdf'},
+   'extensions': {'mediaType': 'application/pdf',
+    'fileSize': 9532975,
+    'comment': '',
+    'mediaTypeDescription': 'PDF Document',
+    'fileId': 'bbf2c7ec-a8a7-4ec9-88d0-eef587989fec',
+    'collectionName': 'contentId-294918'},
+   '_expandable': {'container': '/rest/api/content/294918',
+    'restrictions': '/rest/api/content/att33117/restriction/byOperation',
+    'history': '/rest/api/content/att33117/history',
+    'body': '',
+    'version': '',
+    'descendants': '/rest/api/content/att33117/descendant',
+    'space': '/rest/api/space/SD',
+    'childTypes': '',
+    'schedulePublishInfo': '',
+    'operations': '',
+    'schedulePublishDate': '',
+    'children': '/rest/api/content/att33117/child',
+    'ancestors': ''},
+   '_links': {'webui': '/pages/viewpageattachments.action?pageId=294918&preview=%2F294918%2F33117%2FSurron_LBX_Dual-Sport_E-Dirt_Bike_Owners_Manual.pdf',
+    'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/att33117',
+    'download': '/download/attachments/294918/Surron_LBX_Dual-Sport_E-Dirt_Bike_Owners_Manual.pdf?version=1&modificationDate=1687131259435&cacheVersion=1&api=v2'}},
+  {'id': 'att33110',
+   'type': 'attachment',
+   'status': 'current',
+   'title': 'tmp.doc',
+   'macroRenderedOutput': {},
+   'metadata': {'mediaType': 'application/msword'},
+   'extensions': {'mediaType': 'application/msword',
+    'fileSize': 1154048,
+    'comment': '',
+    'mediaTypeDescription': 'Microsoft Word Document',
+    'fileId': '92e8d498-abb8-4154-80b5-ff57eaeba8ef',
+    'collectionName': 'contentId-294918'},
+   '_expandable': {'container': '/rest/api/content/294918',
+    'restrictions': '/rest/api/content/att33110/restriction/byOperation',
+    'history': '/rest/api/content/att33110/history',
+    'body': '',
+    'version': '',
+    'descendants': '/rest/api/content/att33110/descendant',
+    'space': '/rest/api/space/SD',
+    'childTypes': '',
+    'schedulePublishInfo': '',
+    'operations': '',
+    'schedulePublishDate': '',
+    'children': '/rest/api/content/att33110/child',
+    'ancestors': ''},
+   '_links': {'webui': '/pages/viewpageattachments.action?pageId=294918&preview=%2F294918%2F33110%2Ftmp.doc',
+    'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/att33110',
+    'download': '/download/attachments/294918/tmp.doc?version=1&modificationDate=1687131145283&cacheVersion=1&api=v2'}},
+  {'id': 'att33103',
+   'type': 'attachment',
+   'status': 'current',
+   'title': 'Pandoc-MANUAL.pdf',
+   'macroRenderedOutput': {},
+   'metadata': {'mediaType': 'application/pdf'},
+   'extensions': {'mediaType': 'application/pdf',
+    'fileSize': 515453,
+    'comment': '',
+    'mediaTypeDescription': 'PDF Document',
+    'fileId': '51ee69a9-578d-4d3f-960d-9d25a9a3b1f9',
+    'collectionName': 'contentId-294918'},
+   '_expandable': {'container': '/rest/api/content/294918',
+    'restrictions': '/rest/api/content/att33103/restriction/byOperation',
+    'history': '/rest/api/content/att33103/history',
+    'body': '',
+    'version': '',
+    'descendants': '/rest/api/content/att33103/descendant',
+    'space': '/rest/api/space/SD',
+    'childTypes': '',
+    'schedulePublishInfo': '',
+    'operations': '',
+    'schedulePublishDate': '',
+    'children': '/rest/api/content/att33103/child',
+    'ancestors': ''},
+   '_links': {'webui': '/pages/viewpageattachments.action?pageId=294918&preview=%2F294918%2F33103%2FPandoc-MANUAL.pdf',
+    'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/att33103',
+    'download': '/download/attachments/294918/Pandoc-MANUAL.pdf?version=1&modificationDate=1687131096545&cacheVersion=1&api=v2'}}],
+ 'start': 0,
+ 'limit': 50,
+ 'size': 3,
+ '_links': {'base': 'https://jiggybase.atlassian.net/wiki',
+  'context': '/wiki',
+  'self': 'https://jiggybase.atlassian.net/wiki/rest/api/content/294918/child/attachment'}}
+
+
+import requests
+from atlassian import Confluence
+
+# Replace with your Confluence domain, username (email), and API token
+confluence = Confluence(
+    url='https://your-domain.atlassian.net',
+    username='your-username',
+    password='your-api-token')
+
+# Replace with your Confluence space_key and page ID
+page_id = '123456'
+
+attachments = confluence.get_attachments_from_content(page_id)
+
+# Download each attachment
+for attachment in attachments['results']:
+    title = attachment['title']
+    download_link = attachment['_links']['download']
+    
+    # Replace <Your_Domain> with your actual Confluence domain
+    download_url = f'https://<Your_Domain>.atlassian.net{download_link}'
+    
+    print(f"Downloading attachment: {title}")
+    
+    response = requests.get(download_url, auth=(confluence.username, confluence.password))
+    
+    if response.status_code == 200:
+        with open(title, 'wb') as file:
+            file.write(response.content)
+        print(f"Attachment '{title}' downloaded successfully.")
+    else:
+        print(f"Error downloading attachment '{title}': {response.status_code}")
+
+
+# use md5 of attachment contents as jiggybase document id 
+confluence.get_page_by_id(pages[2]['id'])['version']['when']
+Out[87]: '2023-06-19T01:04:35.154Z'
+
+
+
+
+###
+
