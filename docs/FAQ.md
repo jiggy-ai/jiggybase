@@ -4,11 +4,9 @@ JiggyBase is a service that enables you to extend ChatGPT with your own knowledg
 
 ### Does this use ChatGPT?
 
-Yes, there are two different ways you can chat with ChatGPT using the knowledge in your JiggyBase documents.  
+Yes, the chat.jiggy.ai chat interface is  powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data secure. 
 
-JiggyBase is available as a plugin on the ChatGPT Plugin store.  ChatGPT Plus subscribers can select it there and then chat with the GPT-4 plugin model which knows how to use JiggyBase to search through your document collections and use the information it finds there.
-
-The chat.jiggy.ai chat interface is another option powered by OpenAI APIs, utilizing the same AI models that power OpenAI's ChatGPT service.  We enable the ChatGPT AI models to utilize the knowledge in your document collection in a way that keeps your data secure. 
+Previously JiggyBase utilized ChatgpT Plugins but OpenAI has discontinued ChatGPT Plugins so this option is no longer available.
 
 ### Is my data secure?
 
@@ -144,9 +142,6 @@ Please get in contact with us if you have workflows that require full document s
 The collection description is use to help inform the language model and chat users the purpose of a collection and the type of information that can be found within it.  It is also helpful to provide an example of the type of question that users could answer using this collection.
 
 
-### Is JiggyBase SOC2 certified?
-
-Not currently,  but the team building and operating JiggyBase has prior experience with SOC2 certification and JiggyBase expects to be SOC2 Type 2 certified in early 2024.
 
 ### Can I invite friends or co-workers to my JiggyBase Organization?
 
@@ -161,12 +156,6 @@ We currently support adding a single web page at a time by sending a url to the 
 
 Sorry, no, that is a violation of our terms of service. Also consider that the same AI embedding technology that allows us to help answer your questions so effectively also helps us detect duplicate accounts since duplicate accounts tend to chat in the same style and with similar content as the original account.
 
-
-### Whats the difference between using JiggyBase with chat.jiggy.ai and with the ChatGPT Plugin?
-
-The JiggyBase chat app at chat.jiggy.ai currently only accesses a single collection at a time while the JiggyBase ChatGPT plugin can access all of your collections from a single chat session.  There are other subtle differences in how the search terms are composed to search your collection documents.  The chat.jiggy.ai interface is built on top of OpenAI APIs, but unlike the default ChatGPT terms of service, OpenAI will not use your chat messages for training purposes when using the chat.jiggy.ai interface.   
-
-One key difference is that when using the chat.jiggy.ai interfaces, your chat usage is subject to the message limit of your JiggyBase subscription plan tier.  When chatting via ChatGPT, you there is no per-message limit on JiggyBase and you are just subject to the normal ChatGPT rate limits.
 
 
 ### The JiggyBase console is stuck with the spinning logo, what is going on?
@@ -215,16 +204,5 @@ We do not currently support scanned PDF's.  Support for OCR is coming later in 2
 
 Some PDFs contain settings that prohibit text extraction or printing.  We are unable to process these to access the text content and will produce an error message.
 
-### Sometimes ChatGPT doesn't use JiggyBase when it should. How to make ChatGPT use JiggyBase?
 
-The simplest way is to start your query with a reference to JiggyBase.  We have found that starting a chat with "per jiggybase," usually puts the GPT in the right mood to use JiggyBase.  You can also open with something like "in jiggybase collection XYZ," to further guide it.
 
-### How can I get ChatGPT to provide references?
-
-When JiggyBase searches your collections on behalf of ChatGPT, JiggyBase returns a lot of additional metadata along with the document content to help the GPT model make better sense of it all.  We also include a reference URL which can be used to access each portion of the original text material.
-
-ChatGPT will often provide these reference URLS on its own, but if it doesnt you can ask it to "provide references".  We are working to improve the presentation of the reference material and eventually want to be able to show you the relevant material in the format of the original document.  
-
-### ChatGPT plugin gives the error message "Error communicating with plugin service. Please try again later."
-
-The fix is to uninstall the JiggyBase plugin and re-install it. We are still investigating if something on our side leads to this issue or if it is an OpenAI issue.
