@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field
 
 ###
 ## User
@@ -8,13 +8,13 @@ from pydantic import BaseModel, Field, EmailStr
 class User(BaseModel):
     id:              int = Field(description='Internal user_id')
     name:            str = Field(min_length=1, max_length=39, description='Unique name for the user.')
-    email:           EmailStr  = Field(description='Email address for the user.')    
+    email:           str = Field(description='Email address for the user.')    
     auth0_userid:    str = Field(description='Auth0 userid.  This can be None for anonymous accounts created via api key')
 
 
 class UserPostRequest(BaseModel):
     name:            str           = Field(min_length=1, max_length=39, description='Name for the user.')
-    email:           EmailStr      = Field(description='Email address for the user.')
+    email:           str      = Field(description='Email address for the user.')
     
 
 class UserPostPatchRequest(BaseModel):

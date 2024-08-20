@@ -11,6 +11,7 @@ from .models import ExtractMetadataConfig
 from .models import CollectionPatchRequest, PluginAuthConfigOAuth, PatchPluginOAuthConfigRequest
 from .models import DocumentMetadata
 from typing import Union, List
+from urllib.parse import quote_plus
 
 
         
@@ -125,7 +126,8 @@ class Collection(collection.Collection):
         """
         Get a document by id
         """
-        rsp = self.plugin_session.get(f"/docs/{id}")
+        encoded_id = quote_plus(id)
+        rsp = self.plugin_session.get(f"/documents?doc_id={encoded_id}")
         return [DocumentChunk.parse_obj(c) for c in rsp.json()]
     
     def get_chunks(self, 

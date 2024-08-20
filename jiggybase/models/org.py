@@ -1,5 +1,5 @@
 from typing import Optional, List
-from pydantic import BaseModel, Field, EmailStr, HttpUrl
+from pydantic import BaseModel, Field,  HttpUrl
 from enum import Enum
 
 
@@ -20,13 +20,13 @@ class OrgPatchRequest(BaseModel):
     description: Optional[str] = Field(max_length=255, description='Optional user supplied description.')
 
 class OrgMemberPostRequest(BaseModel):
-    email:  EmailStr     = Field(description='The user_id of a member to invite to the org.')
+    email:  str          = Field(description='The user_id of a member to invite to the org.')
     role:   OrgRole      = Field(description='The users role in the org')
 
 class OrgMember(BaseModel):
     id:                  int      = Field(description="Unique membership id")
     name:                str      = Field(description="Member name")
-    email:               EmailStr = Field(description="Member email")    
+    email:               str      = Field(description="Member email")    
     created_at:          float    = Field(description='The epoch timestamp when the membership was created.')
     updated_at:          float    = Field(description='The epoch timestamp when the membership was updated.')
     invited_by_name:     str      = Field(description="The name that invited this member to the org.")

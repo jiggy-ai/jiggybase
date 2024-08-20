@@ -1,5 +1,5 @@
 from typing import Optional, List
-from pydantic import BaseModel, Field, HttpUrl, validator
+from pydantic import BaseModel, Field, HttpUrl
 from enum import Enum
 from time import time
 

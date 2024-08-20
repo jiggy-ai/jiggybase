@@ -1,5 +1,5 @@
 import os
-from pydantic import BaseModel, HttpUrl, Field, validator
+from pydantic import BaseModel, HttpUrl, Field, field_validator
 from typing import List, Optional
 from enum import Enum
 from .plugin import PluginAuthType        
@@ -18,7 +18,7 @@ class PluginConfig(BaseModel):
     logo:                  Optional[str] = Field(description="The logo for the plugin")
     logo_url:              Optional[HttpUrl] = Field(description="The logo url for the plugin")
 
-    @validator('name_for_model')
+    @field_validator('name_for_model')
     def _name_for_model(cls, v):
         if len(v) > 50 or not v:
             raise ValueError(f'"{v}" is an invalid model name. It must not be empty and is limited to 50 characters.')
@@ -35,7 +35,7 @@ class PatchPluginConfigRequest(BaseModel):
     logo:                  Optional[str] = Field(description="The logo for the plugin")
     logo_url:              Optional[HttpUrl] = Field(description="The logo url for the plugin")
 
-    @validator('name_for_model')
+    @field_validator('name_for_model')
     def _name_for_model(cls, v):
         if len(v) > 50 or not v:
             raise ValueError(f'"{v}" is an invalid model name. It must not be empty and is limited to 50 characters.')

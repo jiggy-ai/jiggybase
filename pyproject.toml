@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jiggybase"
-version = "0.1.4"
+version = "0.2.0"
 authors = [
   { name="Bill Kish", email="bk@jiggy.ai" },
 ]
-dependencies=['loguru', 'pydantic[email]==1.*', 'requests']
+dependencies=['loguru', 'pydantic', 'requests']
 description = "Client for Jiggy AI JiggyBase, including ChatGPT Retriever Plugins"
 readme = "README.md"
 requires-python = ">=3.9"
